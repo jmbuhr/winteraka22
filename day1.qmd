@@ -227,9 +227,263 @@ penguins |>
 - `ggplot2`
 - `tidymodels`
 
-```{r}
+### Readr
 
+```{r}
+path <- "./data/02/gapminder.csv"
+read_lines(path, n_max = 10)
 ```
+
+```{r}
+read_csv(path)
+```
+
+```{r}
+readxl::read_xlsx("./data/02/gapminder.xlsx")
+```
+
+```{r}
+read_tsv("./data/02/gapminder_tsv.txt") |> 
+  mutate(year = as.integer(year)) |> 
+  mutate(year = paste(as.character(year), "hello" )) |> 
+  mutate(year = parse_number(year))
+```
+
+```{r}
+read_tsv("./data/02/gapminder_tsv.txt") |> 
+  mutate(year = as.character(year),
+         decade = str_sub(year, 1, 2),
+         year = str_sub(year, 2, 3)
+         ) |> 
+  select(decade, year, everything()) |> 
+  unite("year", decade, year, sep = "") |> 
+  mutate(year = parse_number(year))
+```
+
+
+```{r}
+read_delim("./data/02/obscure_file.tsv", delim = "~")
+```
+
+```{r}
+read_csv("./data/02/gapminder_messier.csv", comment = "#", skip = 2)
+```
+
+### Tidyr
+
+```{r}
+table1
+```
+
+```{r}
+table2
+```
+
+```{r}
+table2 |> 
+  pivot_wider(names_from = type,
+              values_from = count)
+```
+
+```{r}
+table3 |> 
+  separate(rate, c("cases", "population")) |> 
+  # mutate(across( c(cases, population), parse_number))
+  mutate(across(where(is.character), parse_guess))
+```
+
+```{r}
+table4a
+```
+
+
+```{r}
+table4b
+```
+
+```{r}
+left_join(table4a, table4b, by = c("country"),
+          suffix = c("_cases", "_pop")) |> 
+  pivot_longer(-country) |> 
+  separate(name, c("year", "type")) |> 
+  pivot_wider(names_from = type, values_from = value)
+```
+```{r}
+left_join(table4a, table4b, by = c("country"),
+          suffix = c("_cases", "_pop")) |> 
+  pivot_longer(-country, names_sep = "_",
+               names_to = c("year", "type"))
+```
+
+```{r}
+table5 |> 
+  unite("year", century, year, sep = "") |> 
+  mutate(year = parse_integer(year))
+```
+
+```{r}
+sort_of_an_array <- expand_grid(x = 1:10, y = x, z = x) |> 
+  mutate(value = rnorm(n()))
+```
+
+
+```{r}
+sort_of_an_array |> 
+  group_by(x, y) |> 
+  summarise(mean(value))
+```
+
+### Dplyr
+
+```{r}
+library(gapminder)
+```
+
+```{r}
+gapminder |> 
+  select(country)
+```
+
+```{r}
+gapminder |> 
+  filter(
+    country == "Afghanistan",
+    year == 1957 | year == 1952
+  )
+```
+
+
+```{r}
+gapminder |> 
+  group_by(continent) |>
+  filter(lifeExp == max(lifeExp))
+```
+
+- rowwise
+
+```{r}
+gapminder |> 
+  rowwise()
+```
+```{r}
+df <- tibble(x = runif(6), y = runif(6), z = runif(6))
+
+df |>
+  rowwise() |>
+  mutate(m = mean(c(x, y, z)))
+```
+
+```{r}
+df |> 
+  mutate(m = (x + y + z) / 3 )
+```
+
+```{r}
+df |> 
+  mutate(id = 1:n()) |> 
+  pivot_longer(-id) |> 
+  group_by(id) |>
+  summarise(mean(value))
+```
+
+
+```{r}
+palmerpenguins::penguins |> 
+  group_by(species) |> 
+  summarise(m = mean(bill_length_mm, na.rm = TRUE))
+```
+
+
+### Questions
+
+- tidy evaluation / programming with dplyr
+
+```{r}
+some_country <- "Argentina"
+
+gapminder |> 
+  filter(country == some_country)
+```
+
+<https://dplyr.tidyverse.org/articles/programming.html>
+
+```{r}
+#| error: true
+some_column <- "country"
+
+gapminder |> 
+  group_by(some_column)
+```
+
+```{r}
+our_count <- function(data, column) {
+  data |> 
+    group_by({{column}}) |> 
+    summarise(n = n())
+}
+
+our_count(gapminder, country)
+```
+
+```{r}
+our_count2 <- function(data, column) {
+  column_sym <- sym(column)
+  data |> 
+    group_by(column = eval(column_sym)) |> 
+    summarise(n = n())
+}
+
+our_count2(gapminder, "country")
+```
+
+
+### ggglot2
+
+and forcats
+
+```{r}
+#| fig-height: 12
+#| fig-width: 6
+#| fig-dpi: 300
+gapminder |> 
+  filter(year == max(year)) |> 
+  mutate(
+    country = fct_reorder(country, lifeExp)
+  ) |>
+  ggplot(aes(lifeExp, country)) +
+  geom_point()
+```
+
+```{r}
+gapminder |> 
+  filter(year == max(year)) |> 
+  slice_max(lifeExp, n = 10) |> 
+  mutate(
+    country = fct_reorder(country, lifeExp)
+  ) |>
+  ggplot(aes(lifeExp, country)) +
+  geom_col()
+```
+
+```{r}
+theme_set(theme_bw())
+
+gapminder |> 
+  filter(year == max(year)) |> 
+  ggplot(aes(continent, pop, fill = country)) +
+  geom_col(position = position_dodge(preserve = "single")) +
+  scale_fill_manual(values = country_colors) +
+  guides(fill = "none") +
+  scale_y_continuous(labels = scales::label_number(),
+                     n.breaks = 10)
+```
+
+```{r}
+scales::label_number()
+```
+
+
+- geom_col / bar, other geoms
 
 
 
