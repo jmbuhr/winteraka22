@@ -1,0 +1,207 @@
+---
+title: "Untitled"
+author: Jannik
+date: today
+abstract: |
+  This is our abstract.
+keep-tex: true
+execute:
+  eval: true
+  echo: true
+  cache: true
+  warning: false
+---
+
+# Hello world
+
+*Markdown* text.
+**Bold**.
+
+```{r}
+1 + 1
+```
+
+```{r}
+0 / 0
+```
+
+```{r}
+1 * 10
+```
+
+```{r}
+10 %/% 2
+```
+
+```{r}
+10 %% 2
+```
+
+alt - -
+
+```{r}
+x <- 10
+x = 10
+```
+
+```{r}
+x <- 1:10
+x + 1
+```
+
+```{r}
+y <- x^2
+y
+```
+
+```{r}
+mean(x = y)
+```
+
+```{r}
+library(palmerpenguins)
+```
+
+```{r}
+#| eval: false
+View(penguins)
+```
+
+```{r}
+str(penguins)
+```
+
+
+```{r}
+head(penguins$species)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+add_one <- function(x) {
+  x + 1
+}
+```
+
+ctrl + shift + M
+
+```{r}
+x %>% add_one() %>% sum()
+```
+
+```{r}
+x %>% add_one() %>% sum()
+```
+
+```{r}
+add_this <- function(x, y) {
+  x + y
+}
+```
+
+```{r}
+x |> add_this(10)
+x %>% add_this(x = 10, y = .)
+```
+
+```{r}
+x |> (\(x) x + 1)()
+```
+
+```{r}
+add_one = \(x) + 1
+```
+
+```{r}
+x |> 
+  (function(x) {x + 1})()
+```
+
+Grammar of Graphics
+
+https://ggplot2.tidyverse.org/
+
+```{r}
+x <- 1:10
+x > 5
+```
+```{r}
+c(1, 3, 2, 3)
+```
+
+
+```{r}
+penguins |> 
+  drop_na() |> 
+  ggplot(aes(flipper_length_mm, body_mass_g, shape = sex, color = species)) +
+  geom_point() +
+  theme_minimal() +
+  theme(
+    legend.title = element_text(face = "bold")
+  ) +
+  geom_smooth(method = "lm", se = FALSE, aes(group = species)) +
+  scale_x_continuous(limits = c(180, 200))
+  # lims(x = c(180, 200)) +
+  # coord_cartesian(xlim = c(180, 200))
+```
+
+```{r}
+penguins |> 
+  drop_na() |>
+  ggplot(aes(sex, body_mass_g)) +
+  geom_violin() +
+  ggbeeswarm::geom_quasirandom()
+```
+
+
+Is there a relationship between flipper length and body mass?
+How is this influenced by sex and species?
+Experiment with different visualizations!
+
+```{r}
+penguins |> 
+  select(species, island, bill_length_mm)
+```
+
+```{r}
+penguins |> 
+  select(-species)
+```
+
+```{r}
+penguins |> 
+  select(starts_with("bill"))
+```
+
+```{r}
+penguins |> 
+  mutate(
+    new_column = bill_length_mm * 10,
+    new_column2 = bill_length_mm - bill_depth_mm
+  ) |> 
+  select(starts_with("new"), everything())
+```
+
+```{r}
+penguins |> 
+  summarise(
+    hello = mean(bill_length_mm, na.rm = TRUE)
+  )
+```
+
+```{r}
+penguins |> 
+  group_by(species) |> 
+  summarise(
+    m = mean(bill_length_mm, na.rm = TRUE)
+  ) |> 
+  ungroup()
+```
+
+
+
+
+

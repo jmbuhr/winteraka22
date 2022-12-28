@@ -1,0 +1,74 @@
+---
+title: "Boardgames"
+---
+
+# Setup
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+ratings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/ratings.csv')
+details <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/details.csv')
+```
+
+# EDA
+
+```{r}
+ratings
+```
+
+```{r}
+details
+```
+<https://github.com/rfordatascience/tidytuesday/blob/master/data/2022/2022-01-25/readme.md>
+
+```{r}
+ratings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/ratings.csv')
+details <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/details.csv')
+games <- left_join(ratings, details, by = c("id"))
+games
+```
+
+```{r}
+list("hello", 1, TRUE)
+```
+
+<https://github.com/rstudio/cheatsheets/blob/main/strings.pdf>
+
+```{r}
+clean_category <- function(x) {
+  str_remove_all(x, "[\\[\\]'\\s]") |> 
+    str_split(",")
+}
+clean_category("['hello', 'world']")
+```
+
+tidyr to the rescue: <https://tidyr.tidyverse.org/>
+
+```{r}
+games |> 
+  head() |> 
+  mutate(across(starts_with("boardgame"), clean_category)) |> 
+  unnest_longer(boardgamecategory)
+```
+```{r}
+games |> 
+  head() |> 
+  mutate(across(starts_with("boardgame"), clean_category)) |> 
+  unnest_longer(boardgamecategory) |> 
+  mutate(value = TRUE) |>
+  pivot_wider(names_from = boardgamecategory, values_from = value, values_fill = FALSE)
+```
+
+```{r}
+#| eval: false
+games |> 
+  head() |> 
+  mutate(across(starts_with("boardgame"), clean_category))
+```
+
+
+
+
