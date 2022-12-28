@@ -445,14 +445,21 @@ and forcats
 #| fig-height: 12
 #| fig-width: 6
 #| fig-dpi: 300
-gapminder |> 
+plt <- gapminder |> 
   filter(year == max(year)) |> 
   mutate(
     country = fct_reorder(country, lifeExp)
   ) |>
-  ggplot(aes(lifeExp, country)) +
+  ggplot(aes(lifeExp, country, text = country)) +
   geom_point()
+
+plt
 ```
+
+```{r}
+plotly::ggplotly(plt)
+```
+
 
 ```{r}
 gapminder |> 

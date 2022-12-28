@@ -125,6 +125,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -1116,48 +1124,57 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
 <section id="ggglot2" class="level3">
 <h3 class="anchored" data-anchor-id="ggglot2">ggglot2</h3>
 <p>and forcats</p>
-<div class="cell" data-fig.dpi="300" data-hash="day1_cache/html/unnamed-chunk-64_6e99b547dc5f19a72322eebe4c7bb473">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<div class="cell" data-fig.dpi="300" data-hash="day1_cache/html/unnamed-chunk-64_ad9bba17f314c3f302c6654f34ee1f75">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span> </span>
 <span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
 <span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb118-4"><a href="#cb118-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
 <span id="cb118-5"><a href="#cb118-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country)) <span class="sc">+</span></span>
-<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb118-6"><a href="#cb118-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country, <span class="at">text =</span> country)) <span class="sc">+</span></span>
+<span id="cb118-7"><a href="#cb118-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb118-8"><a href="#cb118-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb118-9"><a href="#cb118-9" aria-hidden="true" tabindex="-1"></a>plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="day1_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="576"></p>
 </div>
 </div>
-<div class="cell" data-hash="day1_cache/html/unnamed-chunk-65_0a9e508aad9cd6947f95a973ab8dd869">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(lifeExp, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb119-4"><a href="#cb119-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb119-5"><a href="#cb119-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
-<span id="cb119-6"><a href="#cb119-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb119-7"><a href="#cb119-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country)) <span class="sc">+</span></span>
-<span id="cb119-8"><a href="#cb119-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="day1_cache/html/unnamed-chunk-65_8050b24543d6d2246ffd21f97030407e">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(plt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="day1_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid" width="672"></p>
+<div id="htmlwidget-4b944e1cb30db6e6475e" style="width:100%;height:464px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4b944e1cb30db6e6475e">{"x":{"data":[{"x":[43.828,76.423,72.301,42.731,75.32,81.235,79.829,75.635,64.062,79.441,56.728,65.554,74.852,50.728,72.39,73.005,52.295,49.58,59.723,50.43,80.653,44.741,50.651,78.553,72.961,72.889,65.152,46.462,55.322,78.782,48.328,75.748,78.273,76.486,78.332,54.791,72.235,74.994,71.338,71.878,51.579,58.04,52.947,79.313,80.657,56.735,59.448,79.406,60.022,79.483,70.259,56.007,46.388,60.916,70.198,82.208,73.338,81.757,64.698,70.65,70.964,59.545,78.885,80.745,80.546,72.567,82.603,72.535,54.11,67.297,78.623,77.588,71.993,42.592,45.678,73.952,59.443,48.303,74.241,54.467,64.164,72.801,76.195,66.803,74.543,71.164,42.082,62.069,52.906,63.785,79.762,80.204,72.899,56.867,46.859,80.196,75.64,65.483,75.537,71.752,71.421,71.688,75.563,78.098,78.746,76.442,72.476,46.242,65.528,72.777,63.062,74.002,42.568,79.972,74.663,77.926,48.159,49.339,80.941,72.396,58.556,39.613,80.884,81.701,74.143,78.4,52.517,70.616,58.42,69.819,73.923,71.777,51.542,79.425,78.242,76.384,73.747,74.249,73.422,62.698,42.384,43.487],"y":[8,107,74,6,99,138,128,102,50,125,34,56,97,22,75,85,25,19,43,20,133,9,21,117,84,82,53,13,32,120,17,104,114,109,115,31,73,98,66,71,24,37,28,122,134,35,41,123,44,126,61,33,12,45,60,141,86,140,52,63,64,42,121,135,132,79,142,78,29,58,118,110,72,5,10,90,40,16,93,30,51,81,105,57,95,65,2,46,27,49,127,131,83,36,14,130,103,54,100,69,67,68,101,112,119,108,77,11,55,80,48,91,4,129,96,111,15,18,137,76,39,1,136,139,92,116,26,62,38,59,89,70,23,124,113,106,88,94,87,47,3,7],"text":["lifeExp: 43.828<br />country: Afghanistan","lifeExp: 76.423<br />country: Albania","lifeExp: 72.301<br />country: Algeria","lifeExp: 42.731<br />country: Angola","lifeExp: 75.320<br />country: Argentina","lifeExp: 81.235<br />country: Australia","lifeExp: 79.829<br />country: Austria","lifeExp: 75.635<br />country: Bahrain","lifeExp: 64.062<br />country: Bangladesh","lifeExp: 79.441<br />country: Belgium","lifeExp: 56.728<br />country: Benin","lifeExp: 65.554<br />country: Bolivia","lifeExp: 74.852<br />country: Bosnia and Herzegovina","lifeExp: 50.728<br />country: Botswana","lifeExp: 72.390<br />country: Brazil","lifeExp: 73.005<br />country: Bulgaria","lifeExp: 52.295<br />country: Burkina Faso","lifeExp: 49.580<br />country: Burundi","lifeExp: 59.723<br />country: Cambodia","lifeExp: 50.430<br />country: Cameroon","lifeExp: 80.653<br />country: Canada","lifeExp: 44.741<br />country: Central African Republic","lifeExp: 50.651<br />country: Chad","lifeExp: 78.553<br />country: Chile","lifeExp: 72.961<br />country: China","lifeExp: 72.889<br />country: Colombia","lifeExp: 65.152<br />country: Comoros","lifeExp: 46.462<br />country: Congo, Dem. Rep.","lifeExp: 55.322<br />country: Congo, Rep.","lifeExp: 78.782<br />country: Costa Rica","lifeExp: 48.328<br />country: Cote d'Ivoire","lifeExp: 75.748<br />country: Croatia","lifeExp: 78.273<br />country: Cuba","lifeExp: 76.486<br />country: Czech Republic","lifeExp: 78.332<br />country: Denmark","lifeExp: 54.791<br />country: Djibouti","lifeExp: 72.235<br />country: Dominican Republic","lifeExp: 74.994<br />country: Ecuador","lifeExp: 71.338<br />country: Egypt","lifeExp: 71.878<br />country: El Salvador","lifeExp: 51.579<br />country: Equatorial Guinea","lifeExp: 58.040<br />country: Eritrea","lifeExp: 52.947<br />country: Ethiopia","lifeExp: 79.313<br />country: Finland","lifeExp: 80.657<br />country: France","lifeExp: 56.735<br />country: Gabon","lifeExp: 59.448<br />country: Gambia","lifeExp: 79.406<br />country: Germany","lifeExp: 60.022<br />country: Ghana","lifeExp: 79.483<br />country: Greece","lifeExp: 70.259<br />country: Guatemala","lifeExp: 56.007<br />country: Guinea","lifeExp: 46.388<br />country: Guinea-Bissau","lifeExp: 60.916<br />country: Haiti","lifeExp: 70.198<br />country: Honduras","lifeExp: 82.208<br />country: Hong Kong, China","lifeExp: 73.338<br />country: Hungary","lifeExp: 81.757<br />country: Iceland","lifeExp: 64.698<br />country: India","lifeExp: 70.650<br />country: Indonesia","lifeExp: 70.964<br />country: Iran","lifeExp: 59.545<br />country: Iraq","lifeExp: 78.885<br />country: Ireland","lifeExp: 80.745<br />country: Israel","lifeExp: 80.546<br />country: Italy","lifeExp: 72.567<br />country: Jamaica","lifeExp: 82.603<br />country: Japan","lifeExp: 72.535<br />country: Jordan","lifeExp: 54.110<br />country: Kenya","lifeExp: 67.297<br />country: Korea, Dem. Rep.","lifeExp: 78.623<br />country: Korea, Rep.","lifeExp: 77.588<br />country: Kuwait","lifeExp: 71.993<br />country: Lebanon","lifeExp: 42.592<br />country: Lesotho","lifeExp: 45.678<br />country: Liberia","lifeExp: 73.952<br />country: Libya","lifeExp: 59.443<br />country: Madagascar","lifeExp: 48.303<br />country: Malawi","lifeExp: 74.241<br />country: Malaysia","lifeExp: 54.467<br />country: Mali","lifeExp: 64.164<br />country: Mauritania","lifeExp: 72.801<br />country: Mauritius","lifeExp: 76.195<br />country: Mexico","lifeExp: 66.803<br />country: Mongolia","lifeExp: 74.543<br />country: Montenegro","lifeExp: 71.164<br />country: Morocco","lifeExp: 42.082<br />country: Mozambique","lifeExp: 62.069<br />country: Myanmar","lifeExp: 52.906<br />country: Namibia","lifeExp: 63.785<br />country: Nepal","lifeExp: 79.762<br />country: Netherlands","lifeExp: 80.204<br />country: New Zealand","lifeExp: 72.899<br />country: Nicaragua","lifeExp: 56.867<br />country: Niger","lifeExp: 46.859<br />country: Nigeria","lifeExp: 80.196<br />country: Norway","lifeExp: 75.640<br />country: Oman","lifeExp: 65.483<br />country: Pakistan","lifeExp: 75.537<br />country: Panama","lifeExp: 71.752<br />country: Paraguay","lifeExp: 71.421<br />country: Peru","lifeExp: 71.688<br />country: Philippines","lifeExp: 75.563<br />country: Poland","lifeExp: 78.098<br />country: Portugal","lifeExp: 78.746<br />country: Puerto Rico","lifeExp: 76.442<br />country: Reunion","lifeExp: 72.476<br />country: Romania","lifeExp: 46.242<br />country: Rwanda","lifeExp: 65.528<br />country: Sao Tome and Principe","lifeExp: 72.777<br />country: Saudi Arabia","lifeExp: 63.062<br />country: Senegal","lifeExp: 74.002<br />country: Serbia","lifeExp: 42.568<br />country: Sierra Leone","lifeExp: 79.972<br />country: Singapore","lifeExp: 74.663<br />country: Slovak Republic","lifeExp: 77.926<br />country: Slovenia","lifeExp: 48.159<br />country: Somalia","lifeExp: 49.339<br />country: South Africa","lifeExp: 80.941<br />country: Spain","lifeExp: 72.396<br />country: Sri Lanka","lifeExp: 58.556<br />country: Sudan","lifeExp: 39.613<br />country: Swaziland","lifeExp: 80.884<br />country: Sweden","lifeExp: 81.701<br />country: Switzerland","lifeExp: 74.143<br />country: Syria","lifeExp: 78.400<br />country: Taiwan","lifeExp: 52.517<br />country: Tanzania","lifeExp: 70.616<br />country: Thailand","lifeExp: 58.420<br />country: Togo","lifeExp: 69.819<br />country: Trinidad and Tobago","lifeExp: 73.923<br />country: Tunisia","lifeExp: 71.777<br />country: Turkey","lifeExp: 51.542<br />country: Uganda","lifeExp: 79.425<br />country: United Kingdom","lifeExp: 78.242<br />country: United States","lifeExp: 76.384<br />country: Uruguay","lifeExp: 73.747<br />country: Venezuela","lifeExp: 74.249<br />country: Vietnam","lifeExp: 73.422<br />country: West Bank and Gaza","lifeExp: 62.698<br />country: Yemen, Rep.","lifeExp: 42.384<br />country: Zambia","lifeExp: 43.487<br />country: Zimbabwe"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":165.844748858448},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[37.4635,84.7525],"tickmode":"array","ticktext":["40","50","60","70","80"],"tickvals":[40,50,60,70,80],"categoryorder":"array","categoryarray":["40","50","60","70","80"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"lifeExp","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,142.6],"tickmode":"array","ticktext":["Swaziland","Mozambique","Zambia","Sierra Leone","Lesotho","Angola","Zimbabwe","Afghanistan","Central African Republic","Liberia","Rwanda","Guinea-Bissau","Congo, Dem. Rep.","Nigeria","Somalia","Malawi","Cote d'Ivoire","South Africa","Burundi","Cameroon","Chad","Botswana","Uganda","Equatorial Guinea","Burkina Faso","Tanzania","Namibia","Ethiopia","Kenya","Mali","Djibouti","Congo, Rep.","Guinea","Benin","Gabon","Niger","Eritrea","Togo","Sudan","Madagascar","Gambia","Iraq","Cambodia","Ghana","Haiti","Myanmar","Yemen, Rep.","Senegal","Nepal","Bangladesh","Mauritania","India","Comoros","Pakistan","Sao Tome and Principe","Bolivia","Mongolia","Korea, Dem. Rep.","Trinidad and Tobago","Honduras","Guatemala","Thailand","Indonesia","Iran","Morocco","Egypt","Peru","Philippines","Paraguay","Turkey","El Salvador","Lebanon","Dominican Republic","Algeria","Brazil","Sri Lanka","Romania","Jordan","Jamaica","Saudi Arabia","Mauritius","Colombia","Nicaragua","China","Bulgaria","Hungary","West Bank and Gaza","Venezuela","Tunisia","Libya","Serbia","Syria","Malaysia","Vietnam","Montenegro","Slovak Republic","Bosnia and Herzegovina","Ecuador","Argentina","Panama","Poland","Bahrain","Oman","Croatia","Mexico","Uruguay","Albania","Reunion","Czech Republic","Kuwait","Slovenia","Portugal","United States","Cuba","Denmark","Taiwan","Chile","Korea, Rep.","Puerto Rico","Costa Rica","Ireland","Finland","Germany","United Kingdom","Belgium","Greece","Netherlands","Austria","Singapore","Norway","New Zealand","Italy","Canada","France","Israel","Sweden","Spain","Australia","Switzerland","Iceland","Hong Kong, China","Japan"],"tickvals":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142],"categoryorder":"array","categoryarray":["Swaziland","Mozambique","Zambia","Sierra Leone","Lesotho","Angola","Zimbabwe","Afghanistan","Central African Republic","Liberia","Rwanda","Guinea-Bissau","Congo, Dem. Rep.","Nigeria","Somalia","Malawi","Cote d'Ivoire","South Africa","Burundi","Cameroon","Chad","Botswana","Uganda","Equatorial Guinea","Burkina Faso","Tanzania","Namibia","Ethiopia","Kenya","Mali","Djibouti","Congo, Rep.","Guinea","Benin","Gabon","Niger","Eritrea","Togo","Sudan","Madagascar","Gambia","Iraq","Cambodia","Ghana","Haiti","Myanmar","Yemen, Rep.","Senegal","Nepal","Bangladesh","Mauritania","India","Comoros","Pakistan","Sao Tome and Principe","Bolivia","Mongolia","Korea, Dem. Rep.","Trinidad and Tobago","Honduras","Guatemala","Thailand","Indonesia","Iran","Morocco","Egypt","Peru","Philippines","Paraguay","Turkey","El Salvador","Lebanon","Dominican Republic","Algeria","Brazil","Sri Lanka","Romania","Jordan","Jamaica","Saudi Arabia","Mauritius","Colombia","Nicaragua","China","Bulgaria","Hungary","West Bank and Gaza","Venezuela","Tunisia","Libya","Serbia","Syria","Malaysia","Vietnam","Montenegro","Slovak Republic","Bosnia and Herzegovina","Ecuador","Argentina","Panama","Poland","Bahrain","Oman","Croatia","Mexico","Uruguay","Albania","Reunion","Czech Republic","Kuwait","Slovenia","Portugal","United States","Cuba","Denmark","Taiwan","Chile","Korea, Rep.","Puerto Rico","Costa Rica","Ireland","Finland","Germany","United Kingdom","Belgium","Greece","Netherlands","Austria","Singapore","Norway","New Zealand","Italy","Canada","France","Israel","Sweden","Spain","Australia","Switzerland","Iceland","Hong Kong, China","Japan"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"country","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"58806cd36890":{"x":{},"y":{},"type":"scatter"}},"cur_data":"58806cd36890","visdat":{"58806cd36890":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div class="cell" data-hash="day1_cache/html/unnamed-chunk-66_f9ce98233a2c8e87e3f4ac417bb8f866">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(continent, pop, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
-<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">"single"</span>)) <span class="sc">+</span></span>
-<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> country_colors) <span class="sc">+</span></span>
-<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb120-9"><a href="#cb120-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(),</span>
-<span id="cb120-10"><a href="#cb120-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n.breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="day1_cache/html/unnamed-chunk-66_4a4afc60cc855d9367ba583d8afcb431">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(lifeExp, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb120-5"><a href="#cb120-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
+<span id="cb120-6"><a href="#cb120-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb120-7"><a href="#cb120-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country)) <span class="sc">+</span></span>
+<span id="cb120-8"><a href="#cb120-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="day1_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell" data-hash="day1_cache/html/unnamed-chunk-67_95683988665db446f0b8eb1f29c18b53">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">label_number</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="day1_cache/html/unnamed-chunk-67_0191a92deaf1d7a965d534783e3a6423">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(continent, pop, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb121-6"><a href="#cb121-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">"single"</span>)) <span class="sc">+</span></span>
+<span id="cb121-7"><a href="#cb121-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> country_colors) <span class="sc">+</span></span>
+<span id="cb121-8"><a href="#cb121-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb121-9"><a href="#cb121-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(),</span>
+<span id="cb121-10"><a href="#cb121-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n.breaks =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="day1_files/figure-html/unnamed-chunk-67-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="day1_cache/html/unnamed-chunk-68_4ff000dad774a071b483bb17b3e1c883">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">label_number</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>function (x) 
 {
@@ -1166,8 +1183,8 @@ Levels: Adelie Chinstrap Gentoo</code></pre>
         style_positive = style_positive, style_negative = style_negative, 
         scale_cut = scale_cut, trim = trim, ...)
 }
-&lt;bytecode: 0x55bf24ecad88&gt;
-&lt;environment: 0x55bf24c63750&gt;</code></pre>
+&lt;bytecode: 0x55e3e7eb78e8&gt;
+&lt;environment: 0x55e3e5861020&gt;</code></pre>
 </div>
 </div>
 <ul>
@@ -1481,494 +1498,501 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb123" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Tag 1</span></span>
-<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Jannik</span></span>
-<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
-<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> |</span></span>
-<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a><span class="co">  This is our abstract.</span></span>
-<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a><span class="an">keep-tex:</span><span class="co"> true</span></span>
-<span id="cb123-8"><a href="#cb123-8" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
-<span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
-<span id="cb123-11"><a href="#cb123-11" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
-<span id="cb123-12"><a href="#cb123-12" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb123-13"><a href="#cb123-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb123-14"><a href="#cb123-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-15"><a href="#cb123-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Morgenschiene</span></span>
-<span id="cb123-16"><a href="#cb123-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-17"><a href="#cb123-17" aria-hidden="true" tabindex="-1"></a>*Markdown* text.</span>
-<span id="cb123-18"><a href="#cb123-18" aria-hidden="true" tabindex="-1"></a>**Bold**.</span>
-<span id="cb123-19"><a href="#cb123-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-22"><a href="#cb123-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-23"><a href="#cb123-23" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb123-24"><a href="#cb123-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-25"><a href="#cb123-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-28"><a href="#cb123-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-29"><a href="#cb123-29" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="sc">/</span> <span class="dv">0</span></span>
-<span id="cb123-30"><a href="#cb123-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-31"><a href="#cb123-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-34"><a href="#cb123-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-35"><a href="#cb123-35" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">*</span> <span class="dv">10</span></span>
-<span id="cb123-36"><a href="#cb123-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-37"><a href="#cb123-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-40"><a href="#cb123-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-41"><a href="#cb123-41" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">%/%</span> <span class="dv">2</span></span>
-<span id="cb123-42"><a href="#cb123-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-43"><a href="#cb123-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-46"><a href="#cb123-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-47"><a href="#cb123-47" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">%%</span> <span class="dv">2</span></span>
-<span id="cb123-48"><a href="#cb123-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-49"><a href="#cb123-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-50"><a href="#cb123-50" aria-hidden="true" tabindex="-1"></a>alt - -</span>
-<span id="cb123-51"><a href="#cb123-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-54"><a href="#cb123-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-55"><a href="#cb123-55" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb123-56"><a href="#cb123-56" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span>
-<span id="cb123-57"><a href="#cb123-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-58"><a href="#cb123-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-61"><a href="#cb123-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-62"><a href="#cb123-62" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb123-63"><a href="#cb123-63" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb123-64"><a href="#cb123-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-65"><a href="#cb123-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-68"><a href="#cb123-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-69"><a href="#cb123-69" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb123-70"><a href="#cb123-70" aria-hidden="true" tabindex="-1"></a>y</span>
-<span id="cb123-71"><a href="#cb123-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-72"><a href="#cb123-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-75"><a href="#cb123-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-76"><a href="#cb123-76" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> y)</span>
-<span id="cb123-77"><a href="#cb123-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-78"><a href="#cb123-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-81"><a href="#cb123-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-82"><a href="#cb123-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
-<span id="cb123-83"><a href="#cb123-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-84"><a href="#cb123-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-87"><a href="#cb123-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-88"><a href="#cb123-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb123-89"><a href="#cb123-89" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(penguins)</span>
-<span id="cb123-90"><a href="#cb123-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-91"><a href="#cb123-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-94"><a href="#cb123-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-95"><a href="#cb123-95" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span>
-<span id="cb123-96"><a href="#cb123-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-97"><a href="#cb123-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-98"><a href="#cb123-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-101"><a href="#cb123-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-102"><a href="#cb123-102" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins<span class="sc">$</span>species)</span>
-<span id="cb123-103"><a href="#cb123-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-104"><a href="#cb123-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-107"><a href="#cb123-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-108"><a href="#cb123-108" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb123-109"><a href="#cb123-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-110"><a href="#cb123-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-113"><a href="#cb123-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-114"><a href="#cb123-114" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb123-115"><a href="#cb123-115" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb123-116"><a href="#cb123-116" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb123-117"><a href="#cb123-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-118"><a href="#cb123-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-119"><a href="#cb123-119" aria-hidden="true" tabindex="-1"></a>ctrl + shift + M</span>
-<span id="cb123-120"><a href="#cb123-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-123"><a href="#cb123-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-124"><a href="#cb123-124" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">add_one</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
-<span id="cb123-125"><a href="#cb123-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-126"><a href="#cb123-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-129"><a href="#cb123-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-130"><a href="#cb123-130" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">add_one</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
-<span id="cb123-131"><a href="#cb123-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-132"><a href="#cb123-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-135"><a href="#cb123-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-136"><a href="#cb123-136" aria-hidden="true" tabindex="-1"></a>add_this <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb123-137"><a href="#cb123-137" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
-<span id="cb123-138"><a href="#cb123-138" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb123-139"><a href="#cb123-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-140"><a href="#cb123-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-143"><a href="#cb123-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-144"><a href="#cb123-144" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> <span class="fu">add_this</span>(<span class="dv">10</span>)</span>
-<span id="cb123-145"><a href="#cb123-145" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">add_this</span>(<span class="at">x =</span> <span class="dv">10</span>, <span class="at">y =</span> .)</span>
-<span id="cb123-146"><a href="#cb123-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-147"><a href="#cb123-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-150"><a href="#cb123-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-151"><a href="#cb123-151" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> (\(x) x <span class="sc">+</span> <span class="dv">1</span>)()</span>
-<span id="cb123-152"><a href="#cb123-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-153"><a href="#cb123-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-156"><a href="#cb123-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-157"><a href="#cb123-157" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">=</span> \(x) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb123-158"><a href="#cb123-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-159"><a href="#cb123-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-162"><a href="#cb123-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-163"><a href="#cb123-163" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> </span>
-<span id="cb123-164"><a href="#cb123-164" aria-hidden="true" tabindex="-1"></a>  (<span class="cf">function</span>(x) {x <span class="sc">+</span> <span class="dv">1</span>})()</span>
-<span id="cb123-165"><a href="#cb123-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-166"><a href="#cb123-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-167"><a href="#cb123-167" aria-hidden="true" tabindex="-1"></a>Grammar of Graphics</span>
-<span id="cb123-168"><a href="#cb123-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-169"><a href="#cb123-169" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://ggplot2.tidyverse.org/&gt;</span></span>
-<span id="cb123-170"><a href="#cb123-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-173"><a href="#cb123-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-174"><a href="#cb123-174" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
-<span id="cb123-175"><a href="#cb123-175" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">5</span></span>
-<span id="cb123-176"><a href="#cb123-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-179"><a href="#cb123-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-180"><a href="#cb123-180" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb123-181"><a href="#cb123-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-182"><a href="#cb123-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-183"><a href="#cb123-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-186"><a href="#cb123-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-187"><a href="#cb123-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-penguin-plot</span></span>
-<span id="cb123-188"><a href="#cb123-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Linear regression on penguin data.</span></span>
-<span id="cb123-189"><a href="#cb123-189" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-190"><a href="#cb123-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb123-191"><a href="#cb123-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(flipper_length_mm, body_mass_g, <span class="at">shape =</span> sex, <span class="at">color =</span> species)) <span class="sc">+</span></span>
-<span id="cb123-192"><a href="#cb123-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb123-193"><a href="#cb123-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb123-194"><a href="#cb123-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb123-195"><a href="#cb123-195" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
-<span id="cb123-196"><a href="#cb123-196" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb123-197"><a href="#cb123-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="fu">aes</span>(<span class="at">group =</span> species)) <span class="sc">+</span></span>
-<span id="cb123-198"><a href="#cb123-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">200</span>))</span>
-<span id="cb123-199"><a href="#cb123-199" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lims(x = c(180, 200)) +</span></span>
-<span id="cb123-200"><a href="#cb123-200" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coord_cartesian(xlim = c(180, 200))</span></span>
-<span id="cb123-201"><a href="#cb123-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-202"><a href="#cb123-202" aria-hidden="true" tabindex="-1"></a>plt</span>
-<span id="cb123-203"><a href="#cb123-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-204"><a href="#cb123-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-205"><a href="#cb123-205" aria-hidden="true" tabindex="-1"></a>Hey, look at @fig-penguin-plot!</span>
-<span id="cb123-206"><a href="#cb123-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-207"><a href="#cb123-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-210"><a href="#cb123-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-211"><a href="#cb123-211" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-212"><a href="#cb123-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
-<span id="cb123-213"><a href="#cb123-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sex, body_mass_g)) <span class="sc">+</span></span>
-<span id="cb123-214"><a href="#cb123-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb123-215"><a href="#cb123-215" aria-hidden="true" tabindex="-1"></a>  ggbeeswarm<span class="sc">::</span><span class="fu">geom_quasirandom</span>()</span>
-<span id="cb123-216"><a href="#cb123-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-217"><a href="#cb123-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-218"><a href="#cb123-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-219"><a href="#cb123-219" aria-hidden="true" tabindex="-1"></a>Is there a relationship between flipper length and body mass?</span>
-<span id="cb123-220"><a href="#cb123-220" aria-hidden="true" tabindex="-1"></a>How is this influenced by sex and species?</span>
-<span id="cb123-221"><a href="#cb123-221" aria-hidden="true" tabindex="-1"></a>Experiment with different visualizations!</span>
-<span id="cb123-222"><a href="#cb123-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-225"><a href="#cb123-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-226"><a href="#cb123-226" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-227"><a href="#cb123-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, island, bill_length_mm)</span>
-<span id="cb123-228"><a href="#cb123-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-229"><a href="#cb123-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-232"><a href="#cb123-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-233"><a href="#cb123-233" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-234"><a href="#cb123-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>species)</span>
-<span id="cb123-235"><a href="#cb123-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-236"><a href="#cb123-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-239"><a href="#cb123-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-240"><a href="#cb123-240" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-241"><a href="#cb123-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"bill"</span>))</span>
-<span id="cb123-242"><a href="#cb123-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-243"><a href="#cb123-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-246"><a href="#cb123-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-247"><a href="#cb123-247" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-248"><a href="#cb123-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb123-249"><a href="#cb123-249" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_column =</span> bill_length_mm <span class="sc">*</span> <span class="dv">10</span>,</span>
-<span id="cb123-250"><a href="#cb123-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_column2 =</span> bill_length_mm <span class="sc">-</span> bill_depth_mm</span>
-<span id="cb123-251"><a href="#cb123-251" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb123-252"><a href="#cb123-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"new"</span>), <span class="fu">everything</span>())</span>
-<span id="cb123-253"><a href="#cb123-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-254"><a href="#cb123-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-257"><a href="#cb123-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-258"><a href="#cb123-258" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-259"><a href="#cb123-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb123-260"><a href="#cb123-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">hello =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-261"><a href="#cb123-261" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb123-262"><a href="#cb123-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-263"><a href="#cb123-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-266"><a href="#cb123-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-267"><a href="#cb123-267" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-268"><a href="#cb123-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
-<span id="cb123-269"><a href="#cb123-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb123-270"><a href="#cb123-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">m =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb123-271"><a href="#cb123-271" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb123-272"><a href="#cb123-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb123-273"><a href="#cb123-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-274"><a href="#cb123-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-275"><a href="#cb123-275" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nachmittagsschiene</span></span>
-<span id="cb123-276"><a href="#cb123-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-277"><a href="#cb123-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
-<span id="cb123-278"><a href="#cb123-278" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-279"><a href="#cb123-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://jmbuhr.de/dataintro/resources.html&gt;</span></span>
-<span id="cb123-280"><a href="#cb123-280" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://quarto.org/&gt;</span></span>
-<span id="cb123-281"><a href="#cb123-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://posit.co/resources/cheatsheets/&gt;</span></span>
-<span id="cb123-282"><a href="#cb123-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://r4ds.had.co.nz/&gt;</span></span>
-<span id="cb123-283"><a href="#cb123-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-284"><a href="#cb123-284" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
-<span id="cb123-285"><a href="#cb123-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-286"><a href="#cb123-286" aria-hidden="true" tabindex="-1"></a><span class="al">![Source: &lt;https://r4ds.had.co.nz/&gt;](img/2022-12-28-14-35-32.png)</span></span>
-<span id="cb123-287"><a href="#cb123-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-288"><a href="#cb123-288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`readr`</span></span>
-<span id="cb123-289"><a href="#cb123-289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tidyr`</span></span>
-<span id="cb123-290"><a href="#cb123-290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`dplyr`</span></span>
-<span id="cb123-291"><a href="#cb123-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`ggplot2`</span></span>
-<span id="cb123-292"><a href="#cb123-292" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tidymodels`</span></span>
-<span id="cb123-293"><a href="#cb123-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-294"><a href="#cb123-294" aria-hidden="true" tabindex="-1"></a><span class="fu">### Readr</span></span>
-<span id="cb123-295"><a href="#cb123-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-298"><a href="#cb123-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-299"><a href="#cb123-299" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"./data/02/gapminder.csv"</span></span>
-<span id="cb123-300"><a href="#cb123-300" aria-hidden="true" tabindex="-1"></a><span class="fu">read_lines</span>(path, <span class="at">n_max =</span> <span class="dv">10</span>)</span>
-<span id="cb123-301"><a href="#cb123-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-302"><a href="#cb123-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-305"><a href="#cb123-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-306"><a href="#cb123-306" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(path)</span>
-<span id="cb123-307"><a href="#cb123-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-308"><a href="#cb123-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-311"><a href="#cb123-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-312"><a href="#cb123-312" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"./data/02/gapminder.xlsx"</span>)</span>
-<span id="cb123-313"><a href="#cb123-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-314"><a href="#cb123-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-317"><a href="#cb123-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-318"><a href="#cb123-318" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="st">"./data/02/gapminder_tsv.txt"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb123-319"><a href="#cb123-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-320"><a href="#cb123-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">paste</span>(<span class="fu">as.character</span>(year), <span class="st">"hello"</span> )) <span class="sc">|&gt;</span> </span>
-<span id="cb123-321"><a href="#cb123-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">parse_number</span>(year))</span>
-<span id="cb123-322"><a href="#cb123-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-323"><a href="#cb123-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-326"><a href="#cb123-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-327"><a href="#cb123-327" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="st">"./data/02/gapminder_tsv.txt"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb123-328"><a href="#cb123-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.character</span>(year),</span>
-<span id="cb123-329"><a href="#cb123-329" aria-hidden="true" tabindex="-1"></a>         <span class="at">decade =</span> <span class="fu">str_sub</span>(year, <span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb123-330"><a href="#cb123-330" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">str_sub</span>(year, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb123-331"><a href="#cb123-331" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">|&gt;</span> </span>
-<span id="cb123-332"><a href="#cb123-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(decade, year, <span class="fu">everything</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb123-333"><a href="#cb123-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">"year"</span>, decade, year, <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb123-334"><a href="#cb123-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">parse_number</span>(year))</span>
-<span id="cb123-335"><a href="#cb123-335" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-336"><a href="#cb123-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-337"><a href="#cb123-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-340"><a href="#cb123-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-341"><a href="#cb123-341" aria-hidden="true" tabindex="-1"></a><span class="fu">read_delim</span>(<span class="st">"./data/02/obscure_file.tsv"</span>, <span class="at">delim =</span> <span class="st">"~"</span>)</span>
-<span id="cb123-342"><a href="#cb123-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-343"><a href="#cb123-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-346"><a href="#cb123-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-347"><a href="#cb123-347" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"./data/02/gapminder_messier.csv"</span>, <span class="at">comment =</span> <span class="st">"#"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
-<span id="cb123-348"><a href="#cb123-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-349"><a href="#cb123-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-350"><a href="#cb123-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tidyr</span></span>
-<span id="cb123-351"><a href="#cb123-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-354"><a href="#cb123-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-355"><a href="#cb123-355" aria-hidden="true" tabindex="-1"></a>table1</span>
-<span id="cb123-356"><a href="#cb123-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-357"><a href="#cb123-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-360"><a href="#cb123-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-361"><a href="#cb123-361" aria-hidden="true" tabindex="-1"></a>table2</span>
-<span id="cb123-362"><a href="#cb123-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-363"><a href="#cb123-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-366"><a href="#cb123-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-367"><a href="#cb123-367" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> </span>
-<span id="cb123-368"><a href="#cb123-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type,</span>
-<span id="cb123-369"><a href="#cb123-369" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> count)</span>
-<span id="cb123-370"><a href="#cb123-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-371"><a href="#cb123-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-374"><a href="#cb123-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-375"><a href="#cb123-375" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">|&gt;</span> </span>
-<span id="cb123-376"><a href="#cb123-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-377"><a href="#cb123-377" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate(across( c(cases, population), parse_number))</span></span>
-<span id="cb123-378"><a href="#cb123-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), parse_guess))</span>
-<span id="cb123-379"><a href="#cb123-379" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-380"><a href="#cb123-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-383"><a href="#cb123-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-384"><a href="#cb123-384" aria-hidden="true" tabindex="-1"></a>table4a</span>
-<span id="cb123-385"><a href="#cb123-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-386"><a href="#cb123-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-387"><a href="#cb123-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-390"><a href="#cb123-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-391"><a href="#cb123-391" aria-hidden="true" tabindex="-1"></a>table4b</span>
-<span id="cb123-392"><a href="#cb123-392" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-393"><a href="#cb123-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-396"><a href="#cb123-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-397"><a href="#cb123-397" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(table4a, table4b, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>),</span>
-<span id="cb123-398"><a href="#cb123-398" aria-hidden="true" tabindex="-1"></a>          <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">"_cases"</span>, <span class="st">"_pop"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-399"><a href="#cb123-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>country) <span class="sc">|&gt;</span> </span>
-<span id="cb123-400"><a href="#cb123-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(name, <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"type"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-401"><a href="#cb123-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, <span class="at">values_from =</span> value)</span>
-<span id="cb123-402"><a href="#cb123-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-405"><a href="#cb123-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-406"><a href="#cb123-406" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(table4a, table4b, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>),</span>
-<span id="cb123-407"><a href="#cb123-407" aria-hidden="true" tabindex="-1"></a>          <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">"_cases"</span>, <span class="st">"_pop"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-408"><a href="#cb123-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>country, <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
-<span id="cb123-409"><a href="#cb123-409" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"type"</span>))</span>
-<span id="cb123-410"><a href="#cb123-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-411"><a href="#cb123-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-414"><a href="#cb123-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-415"><a href="#cb123-415" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">|&gt;</span> </span>
-<span id="cb123-416"><a href="#cb123-416" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">"year"</span>, century, year, <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb123-417"><a href="#cb123-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">parse_integer</span>(year))</span>
-<span id="cb123-418"><a href="#cb123-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-419"><a href="#cb123-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-422"><a href="#cb123-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-423"><a href="#cb123-423" aria-hidden="true" tabindex="-1"></a>sort_of_an_array <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> x, <span class="at">z =</span> x) <span class="sc">|&gt;</span> </span>
-<span id="cb123-424"><a href="#cb123-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>()))</span>
-<span id="cb123-425"><a href="#cb123-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-426"><a href="#cb123-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-427"><a href="#cb123-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-430"><a href="#cb123-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-431"><a href="#cb123-431" aria-hidden="true" tabindex="-1"></a>sort_of_an_array <span class="sc">|&gt;</span> </span>
-<span id="cb123-432"><a href="#cb123-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(x, y) <span class="sc">|&gt;</span> </span>
-<span id="cb123-433"><a href="#cb123-433" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(value))</span>
-<span id="cb123-434"><a href="#cb123-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-435"><a href="#cb123-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-436"><a href="#cb123-436" aria-hidden="true" tabindex="-1"></a><span class="fu">### Dplyr</span></span>
-<span id="cb123-437"><a href="#cb123-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-440"><a href="#cb123-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-441"><a href="#cb123-441" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
-<span id="cb123-442"><a href="#cb123-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-443"><a href="#cb123-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-446"><a href="#cb123-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-447"><a href="#cb123-447" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-448"><a href="#cb123-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country)</span>
-<span id="cb123-449"><a href="#cb123-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-450"><a href="#cb123-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-453"><a href="#cb123-453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-454"><a href="#cb123-454" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-455"><a href="#cb123-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb123-456"><a href="#cb123-456" aria-hidden="true" tabindex="-1"></a>    country <span class="sc">==</span> <span class="st">"Afghanistan"</span>,</span>
-<span id="cb123-457"><a href="#cb123-457" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="dv">1957</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">1952</span></span>
-<span id="cb123-458"><a href="#cb123-458" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb123-459"><a href="#cb123-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-460"><a href="#cb123-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-461"><a href="#cb123-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-464"><a href="#cb123-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-465"><a href="#cb123-465" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-466"><a href="#cb123-466" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">|&gt;</span></span>
-<span id="cb123-467"><a href="#cb123-467" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lifeExp <span class="sc">==</span> <span class="fu">max</span>(lifeExp))</span>
-<span id="cb123-468"><a href="#cb123-468" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-469"><a href="#cb123-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-470"><a href="#cb123-470" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>rowwise</span>
-<span id="cb123-471"><a href="#cb123-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-474"><a href="#cb123-474" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-475"><a href="#cb123-475" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-476"><a href="#cb123-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>()</span>
-<span id="cb123-477"><a href="#cb123-477" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-480"><a href="#cb123-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-481"><a href="#cb123-481" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">z =</span> <span class="fu">runif</span>(<span class="dv">6</span>))</span>
-<span id="cb123-482"><a href="#cb123-482" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-483"><a href="#cb123-483" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
-<span id="cb123-484"><a href="#cb123-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb123-485"><a href="#cb123-485" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">c</span>(x, y, z)))</span>
-<span id="cb123-486"><a href="#cb123-486" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-487"><a href="#cb123-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-490"><a href="#cb123-490" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-491"><a href="#cb123-491" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
-<span id="cb123-492"><a href="#cb123-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> (x <span class="sc">+</span> y <span class="sc">+</span> z) <span class="sc">/</span> <span class="dv">3</span> )</span>
-<span id="cb123-493"><a href="#cb123-493" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-494"><a href="#cb123-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-497"><a href="#cb123-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-498"><a href="#cb123-498" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
-<span id="cb123-499"><a href="#cb123-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
-<span id="cb123-500"><a href="#cb123-500" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>id) <span class="sc">|&gt;</span> </span>
-<span id="cb123-501"><a href="#cb123-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
-<span id="cb123-502"><a href="#cb123-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(value))</span>
-<span id="cb123-503"><a href="#cb123-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-504"><a href="#cb123-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-505"><a href="#cb123-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-508"><a href="#cb123-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-509"><a href="#cb123-509" aria-hidden="true" tabindex="-1"></a>palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span> </span>
-<span id="cb123-510"><a href="#cb123-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
-<span id="cb123-511"><a href="#cb123-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb123-512"><a href="#cb123-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-513"><a href="#cb123-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-514"><a href="#cb123-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-515"><a href="#cb123-515" aria-hidden="true" tabindex="-1"></a><span class="fu">### Questions</span></span>
-<span id="cb123-516"><a href="#cb123-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-517"><a href="#cb123-517" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>tidy evaluation / programming with dplyr</span>
-<span id="cb123-518"><a href="#cb123-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-521"><a href="#cb123-521" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-522"><a href="#cb123-522" aria-hidden="true" tabindex="-1"></a>some_country <span class="ot">&lt;-</span> <span class="st">"Argentina"</span></span>
-<span id="cb123-523"><a href="#cb123-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-524"><a href="#cb123-524" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-525"><a href="#cb123-525" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> some_country)</span>
-<span id="cb123-526"><a href="#cb123-526" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-527"><a href="#cb123-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-528"><a href="#cb123-528" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://dplyr.tidyverse.org/articles/programming.html&gt;</span></span>
-<span id="cb123-529"><a href="#cb123-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-532"><a href="#cb123-532" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-533"><a href="#cb123-533" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb123-534"><a href="#cb123-534" aria-hidden="true" tabindex="-1"></a>some_column <span class="ot">&lt;-</span> <span class="st">"country"</span></span>
-<span id="cb123-535"><a href="#cb123-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-536"><a href="#cb123-536" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-537"><a href="#cb123-537" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(some_column)</span>
-<span id="cb123-538"><a href="#cb123-538" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-539"><a href="#cb123-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-542"><a href="#cb123-542" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-543"><a href="#cb123-543" aria-hidden="true" tabindex="-1"></a>our_count <span class="ot">&lt;-</span> <span class="cf">function</span>(data, column) {</span>
-<span id="cb123-544"><a href="#cb123-544" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span> </span>
-<span id="cb123-545"><a href="#cb123-545" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{column}}) <span class="sc">|&gt;</span> </span>
-<span id="cb123-546"><a href="#cb123-546" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb123-547"><a href="#cb123-547" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb123-548"><a href="#cb123-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-549"><a href="#cb123-549" aria-hidden="true" tabindex="-1"></a><span class="fu">our_count</span>(gapminder, country)</span>
-<span id="cb123-550"><a href="#cb123-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-551"><a href="#cb123-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-554"><a href="#cb123-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-555"><a href="#cb123-555" aria-hidden="true" tabindex="-1"></a>our_count2 <span class="ot">&lt;-</span> <span class="cf">function</span>(data, column) {</span>
-<span id="cb123-556"><a href="#cb123-556" aria-hidden="true" tabindex="-1"></a>  column_sym <span class="ot">&lt;-</span> <span class="fu">sym</span>(column)</span>
-<span id="cb123-557"><a href="#cb123-557" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span> </span>
-<span id="cb123-558"><a href="#cb123-558" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="at">column =</span> <span class="fu">eval</span>(column_sym)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-559"><a href="#cb123-559" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
-<span id="cb123-560"><a href="#cb123-560" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb123-561"><a href="#cb123-561" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-562"><a href="#cb123-562" aria-hidden="true" tabindex="-1"></a><span class="fu">our_count2</span>(gapminder, <span class="st">"country"</span>)</span>
-<span id="cb123-563"><a href="#cb123-563" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-564"><a href="#cb123-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-565"><a href="#cb123-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-566"><a href="#cb123-566" aria-hidden="true" tabindex="-1"></a><span class="fu">### ggglot2</span></span>
-<span id="cb123-567"><a href="#cb123-567" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-568"><a href="#cb123-568" aria-hidden="true" tabindex="-1"></a>and forcats</span>
-<span id="cb123-569"><a href="#cb123-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-572"><a href="#cb123-572" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-573"><a href="#cb123-573" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 12</span></span>
-<span id="cb123-574"><a href="#cb123-574" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
-<span id="cb123-575"><a href="#cb123-575" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
-<span id="cb123-576"><a href="#cb123-576" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-577"><a href="#cb123-577" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-578"><a href="#cb123-578" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb123-579"><a href="#cb123-579" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
-<span id="cb123-580"><a href="#cb123-580" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb123-581"><a href="#cb123-581" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country)) <span class="sc">+</span></span>
-<span id="cb123-582"><a href="#cb123-582" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb123-583"><a href="#cb123-583" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-584"><a href="#cb123-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-587"><a href="#cb123-587" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-588"><a href="#cb123-588" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-589"><a href="#cb123-589" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-590"><a href="#cb123-590" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(lifeExp, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb123-591"><a href="#cb123-591" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb123-592"><a href="#cb123-592" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
-<span id="cb123-593"><a href="#cb123-593" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb123-594"><a href="#cb123-594" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country)) <span class="sc">+</span></span>
-<span id="cb123-595"><a href="#cb123-595" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb123-596"><a href="#cb123-596" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-597"><a href="#cb123-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-600"><a href="#cb123-600" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-601"><a href="#cb123-601" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
-<span id="cb123-602"><a href="#cb123-602" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-603"><a href="#cb123-603" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
-<span id="cb123-604"><a href="#cb123-604" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
-<span id="cb123-605"><a href="#cb123-605" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(continent, pop, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
-<span id="cb123-606"><a href="#cb123-606" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">"single"</span>)) <span class="sc">+</span></span>
-<span id="cb123-607"><a href="#cb123-607" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> country_colors) <span class="sc">+</span></span>
-<span id="cb123-608"><a href="#cb123-608" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
-<span id="cb123-609"><a href="#cb123-609" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(),</span>
-<span id="cb123-610"><a href="#cb123-610" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n.breaks =</span> <span class="dv">10</span>)</span>
-<span id="cb123-611"><a href="#cb123-611" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-612"><a href="#cb123-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-615"><a href="#cb123-615" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb123-616"><a href="#cb123-616" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">label_number</span>()</span>
-<span id="cb123-617"><a href="#cb123-617" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb123-618"><a href="#cb123-618" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-619"><a href="#cb123-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-620"><a href="#cb123-620" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>geom_col / bar, other geoms</span>
-<span id="cb123-621"><a href="#cb123-621" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-622"><a href="#cb123-622" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb124" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb124-1"><a href="#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb124-2"><a href="#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Tag 1</span></span>
+<span id="cb124-3"><a href="#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> Jannik</span></span>
+<span id="cb124-4"><a href="#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> today</span></span>
+<span id="cb124-5"><a href="#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="an">abstract:</span><span class="co"> |</span></span>
+<span id="cb124-6"><a href="#cb124-6" aria-hidden="true" tabindex="-1"></a><span class="co">  This is our abstract.</span></span>
+<span id="cb124-7"><a href="#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="an">keep-tex:</span><span class="co"> true</span></span>
+<span id="cb124-8"><a href="#cb124-8" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb124-9"><a href="#cb124-9" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true</span></span>
+<span id="cb124-10"><a href="#cb124-10" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb124-11"><a href="#cb124-11" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
+<span id="cb124-12"><a href="#cb124-12" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb124-13"><a href="#cb124-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb124-14"><a href="#cb124-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-15"><a href="#cb124-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># Morgenschiene</span></span>
+<span id="cb124-16"><a href="#cb124-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-17"><a href="#cb124-17" aria-hidden="true" tabindex="-1"></a>*Markdown* text.</span>
+<span id="cb124-18"><a href="#cb124-18" aria-hidden="true" tabindex="-1"></a>**Bold**.</span>
+<span id="cb124-19"><a href="#cb124-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-22"><a href="#cb124-22" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-23"><a href="#cb124-23" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb124-24"><a href="#cb124-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-25"><a href="#cb124-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-28"><a href="#cb124-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-29"><a href="#cb124-29" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="sc">/</span> <span class="dv">0</span></span>
+<span id="cb124-30"><a href="#cb124-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-31"><a href="#cb124-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-34"><a href="#cb124-34" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-35"><a href="#cb124-35" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">*</span> <span class="dv">10</span></span>
+<span id="cb124-36"><a href="#cb124-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-37"><a href="#cb124-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-40"><a href="#cb124-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-41"><a href="#cb124-41" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">%/%</span> <span class="dv">2</span></span>
+<span id="cb124-42"><a href="#cb124-42" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-43"><a href="#cb124-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-46"><a href="#cb124-46" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-47"><a href="#cb124-47" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">%%</span> <span class="dv">2</span></span>
+<span id="cb124-48"><a href="#cb124-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-49"><a href="#cb124-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-50"><a href="#cb124-50" aria-hidden="true" tabindex="-1"></a>alt - -</span>
+<span id="cb124-51"><a href="#cb124-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-54"><a href="#cb124-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-55"><a href="#cb124-55" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb124-56"><a href="#cb124-56" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="dv">10</span></span>
+<span id="cb124-57"><a href="#cb124-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-58"><a href="#cb124-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-61"><a href="#cb124-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-62"><a href="#cb124-62" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb124-63"><a href="#cb124-63" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb124-64"><a href="#cb124-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-65"><a href="#cb124-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-68"><a href="#cb124-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-69"><a href="#cb124-69" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb124-70"><a href="#cb124-70" aria-hidden="true" tabindex="-1"></a>y</span>
+<span id="cb124-71"><a href="#cb124-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-72"><a href="#cb124-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-75"><a href="#cb124-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-76"><a href="#cb124-76" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="at">x =</span> y)</span>
+<span id="cb124-77"><a href="#cb124-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-78"><a href="#cb124-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-81"><a href="#cb124-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-82"><a href="#cb124-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb124-83"><a href="#cb124-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-84"><a href="#cb124-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-87"><a href="#cb124-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-88"><a href="#cb124-88" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb124-89"><a href="#cb124-89" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(penguins)</span>
+<span id="cb124-90"><a href="#cb124-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-91"><a href="#cb124-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-94"><a href="#cb124-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-95"><a href="#cb124-95" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span>
+<span id="cb124-96"><a href="#cb124-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-97"><a href="#cb124-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-98"><a href="#cb124-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-101"><a href="#cb124-101" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-102"><a href="#cb124-102" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins<span class="sc">$</span>species)</span>
+<span id="cb124-103"><a href="#cb124-103" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-104"><a href="#cb124-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-107"><a href="#cb124-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-108"><a href="#cb124-108" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb124-109"><a href="#cb124-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-110"><a href="#cb124-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-113"><a href="#cb124-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-114"><a href="#cb124-114" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb124-115"><a href="#cb124-115" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb124-116"><a href="#cb124-116" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb124-117"><a href="#cb124-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-118"><a href="#cb124-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-119"><a href="#cb124-119" aria-hidden="true" tabindex="-1"></a>ctrl + shift + M</span>
+<span id="cb124-120"><a href="#cb124-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-123"><a href="#cb124-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-124"><a href="#cb124-124" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">add_one</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
+<span id="cb124-125"><a href="#cb124-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-126"><a href="#cb124-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-129"><a href="#cb124-129" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-130"><a href="#cb124-130" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">add_one</span>() <span class="sc">%&gt;%</span> <span class="fu">sum</span>()</span>
+<span id="cb124-131"><a href="#cb124-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-132"><a href="#cb124-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-135"><a href="#cb124-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-136"><a href="#cb124-136" aria-hidden="true" tabindex="-1"></a>add_this <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb124-137"><a href="#cb124-137" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">+</span> y</span>
+<span id="cb124-138"><a href="#cb124-138" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb124-139"><a href="#cb124-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-140"><a href="#cb124-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-143"><a href="#cb124-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-144"><a href="#cb124-144" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> <span class="fu">add_this</span>(<span class="dv">10</span>)</span>
+<span id="cb124-145"><a href="#cb124-145" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">add_this</span>(<span class="at">x =</span> <span class="dv">10</span>, <span class="at">y =</span> .)</span>
+<span id="cb124-146"><a href="#cb124-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-147"><a href="#cb124-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-150"><a href="#cb124-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-151"><a href="#cb124-151" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> (\(x) x <span class="sc">+</span> <span class="dv">1</span>)()</span>
+<span id="cb124-152"><a href="#cb124-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-153"><a href="#cb124-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-156"><a href="#cb124-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-157"><a href="#cb124-157" aria-hidden="true" tabindex="-1"></a>add_one <span class="ot">=</span> \(x) <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb124-158"><a href="#cb124-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-159"><a href="#cb124-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-162"><a href="#cb124-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-163"><a href="#cb124-163" aria-hidden="true" tabindex="-1"></a>x <span class="sc">|&gt;</span> </span>
+<span id="cb124-164"><a href="#cb124-164" aria-hidden="true" tabindex="-1"></a>  (<span class="cf">function</span>(x) {x <span class="sc">+</span> <span class="dv">1</span>})()</span>
+<span id="cb124-165"><a href="#cb124-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-166"><a href="#cb124-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-167"><a href="#cb124-167" aria-hidden="true" tabindex="-1"></a>Grammar of Graphics</span>
+<span id="cb124-168"><a href="#cb124-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-169"><a href="#cb124-169" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://ggplot2.tidyverse.org/&gt;</span></span>
+<span id="cb124-170"><a href="#cb124-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-173"><a href="#cb124-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-174"><a href="#cb124-174" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb124-175"><a href="#cb124-175" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb124-176"><a href="#cb124-176" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-179"><a href="#cb124-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-180"><a href="#cb124-180" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb124-181"><a href="#cb124-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-182"><a href="#cb124-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-183"><a href="#cb124-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-186"><a href="#cb124-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-187"><a href="#cb124-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-penguin-plot</span></span>
+<span id="cb124-188"><a href="#cb124-188" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: Linear regression on penguin data.</span></span>
+<span id="cb124-189"><a href="#cb124-189" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-190"><a href="#cb124-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb124-191"><a href="#cb124-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(flipper_length_mm, body_mass_g, <span class="at">shape =</span> sex, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb124-192"><a href="#cb124-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb124-193"><a href="#cb124-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb124-194"><a href="#cb124-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb124-195"><a href="#cb124-195" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>)</span>
+<span id="cb124-196"><a href="#cb124-196" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb124-197"><a href="#cb124-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="fu">aes</span>(<span class="at">group =</span> species)) <span class="sc">+</span></span>
+<span id="cb124-198"><a href="#cb124-198" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">200</span>))</span>
+<span id="cb124-199"><a href="#cb124-199" aria-hidden="true" tabindex="-1"></a>  <span class="co"># lims(x = c(180, 200)) +</span></span>
+<span id="cb124-200"><a href="#cb124-200" aria-hidden="true" tabindex="-1"></a>  <span class="co"># coord_cartesian(xlim = c(180, 200))</span></span>
+<span id="cb124-201"><a href="#cb124-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-202"><a href="#cb124-202" aria-hidden="true" tabindex="-1"></a>plt</span>
+<span id="cb124-203"><a href="#cb124-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-204"><a href="#cb124-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-205"><a href="#cb124-205" aria-hidden="true" tabindex="-1"></a>Hey, look at @fig-penguin-plot!</span>
+<span id="cb124-206"><a href="#cb124-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-207"><a href="#cb124-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-210"><a href="#cb124-210" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-211"><a href="#cb124-211" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-212"><a href="#cb124-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb124-213"><a href="#cb124-213" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sex, body_mass_g)) <span class="sc">+</span></span>
+<span id="cb124-214"><a href="#cb124-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb124-215"><a href="#cb124-215" aria-hidden="true" tabindex="-1"></a>  ggbeeswarm<span class="sc">::</span><span class="fu">geom_quasirandom</span>()</span>
+<span id="cb124-216"><a href="#cb124-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-217"><a href="#cb124-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-218"><a href="#cb124-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-219"><a href="#cb124-219" aria-hidden="true" tabindex="-1"></a>Is there a relationship between flipper length and body mass?</span>
+<span id="cb124-220"><a href="#cb124-220" aria-hidden="true" tabindex="-1"></a>How is this influenced by sex and species?</span>
+<span id="cb124-221"><a href="#cb124-221" aria-hidden="true" tabindex="-1"></a>Experiment with different visualizations!</span>
+<span id="cb124-222"><a href="#cb124-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-225"><a href="#cb124-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-226"><a href="#cb124-226" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-227"><a href="#cb124-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(species, island, bill_length_mm)</span>
+<span id="cb124-228"><a href="#cb124-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-229"><a href="#cb124-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-232"><a href="#cb124-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-233"><a href="#cb124-233" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-234"><a href="#cb124-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>species)</span>
+<span id="cb124-235"><a href="#cb124-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-236"><a href="#cb124-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-239"><a href="#cb124-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-240"><a href="#cb124-240" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-241"><a href="#cb124-241" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"bill"</span>))</span>
+<span id="cb124-242"><a href="#cb124-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-243"><a href="#cb124-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-246"><a href="#cb124-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-247"><a href="#cb124-247" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-248"><a href="#cb124-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb124-249"><a href="#cb124-249" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_column =</span> bill_length_mm <span class="sc">*</span> <span class="dv">10</span>,</span>
+<span id="cb124-250"><a href="#cb124-250" aria-hidden="true" tabindex="-1"></a>    <span class="at">new_column2 =</span> bill_length_mm <span class="sc">-</span> bill_depth_mm</span>
+<span id="cb124-251"><a href="#cb124-251" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb124-252"><a href="#cb124-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"new"</span>), <span class="fu">everything</span>())</span>
+<span id="cb124-253"><a href="#cb124-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-254"><a href="#cb124-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-257"><a href="#cb124-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-258"><a href="#cb124-258" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-259"><a href="#cb124-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb124-260"><a href="#cb124-260" aria-hidden="true" tabindex="-1"></a>    <span class="at">hello =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb124-261"><a href="#cb124-261" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb124-262"><a href="#cb124-262" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-263"><a href="#cb124-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-266"><a href="#cb124-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-267"><a href="#cb124-267" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-268"><a href="#cb124-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
+<span id="cb124-269"><a href="#cb124-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb124-270"><a href="#cb124-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">m =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb124-271"><a href="#cb124-271" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb124-272"><a href="#cb124-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb124-273"><a href="#cb124-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-274"><a href="#cb124-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-275"><a href="#cb124-275" aria-hidden="true" tabindex="-1"></a><span class="fu"># Nachmittagsschiene</span></span>
+<span id="cb124-276"><a href="#cb124-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-277"><a href="#cb124-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## Resources</span></span>
+<span id="cb124-278"><a href="#cb124-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-279"><a href="#cb124-279" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://jmbuhr.de/dataintro/resources.html&gt;</span></span>
+<span id="cb124-280"><a href="#cb124-280" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://quarto.org/&gt;</span></span>
+<span id="cb124-281"><a href="#cb124-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://posit.co/resources/cheatsheets/&gt;</span></span>
+<span id="cb124-282"><a href="#cb124-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="ot">&lt;https://r4ds.had.co.nz/&gt;</span></span>
+<span id="cb124-283"><a href="#cb124-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-284"><a href="#cb124-284" aria-hidden="true" tabindex="-1"></a><span class="fu">## Overview</span></span>
+<span id="cb124-285"><a href="#cb124-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-286"><a href="#cb124-286" aria-hidden="true" tabindex="-1"></a><span class="al">![Source: &lt;https://r4ds.had.co.nz/&gt;](img/2022-12-28-14-35-32.png)</span></span>
+<span id="cb124-287"><a href="#cb124-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-288"><a href="#cb124-288" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`readr`</span></span>
+<span id="cb124-289"><a href="#cb124-289" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tidyr`</span></span>
+<span id="cb124-290"><a href="#cb124-290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`dplyr`</span></span>
+<span id="cb124-291"><a href="#cb124-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`ggplot2`</span></span>
+<span id="cb124-292"><a href="#cb124-292" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`tidymodels`</span></span>
+<span id="cb124-293"><a href="#cb124-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-294"><a href="#cb124-294" aria-hidden="true" tabindex="-1"></a><span class="fu">### Readr</span></span>
+<span id="cb124-295"><a href="#cb124-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-298"><a href="#cb124-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-299"><a href="#cb124-299" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"./data/02/gapminder.csv"</span></span>
+<span id="cb124-300"><a href="#cb124-300" aria-hidden="true" tabindex="-1"></a><span class="fu">read_lines</span>(path, <span class="at">n_max =</span> <span class="dv">10</span>)</span>
+<span id="cb124-301"><a href="#cb124-301" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-302"><a href="#cb124-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-305"><a href="#cb124-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-306"><a href="#cb124-306" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(path)</span>
+<span id="cb124-307"><a href="#cb124-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-308"><a href="#cb124-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-311"><a href="#cb124-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-312"><a href="#cb124-312" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_xlsx</span>(<span class="st">"./data/02/gapminder.xlsx"</span>)</span>
+<span id="cb124-313"><a href="#cb124-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-314"><a href="#cb124-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-317"><a href="#cb124-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-318"><a href="#cb124-318" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="st">"./data/02/gapminder_tsv.txt"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb124-319"><a href="#cb124-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.integer</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-320"><a href="#cb124-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">paste</span>(<span class="fu">as.character</span>(year), <span class="st">"hello"</span> )) <span class="sc">|&gt;</span> </span>
+<span id="cb124-321"><a href="#cb124-321" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">parse_number</span>(year))</span>
+<span id="cb124-322"><a href="#cb124-322" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-323"><a href="#cb124-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-326"><a href="#cb124-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-327"><a href="#cb124-327" aria-hidden="true" tabindex="-1"></a><span class="fu">read_tsv</span>(<span class="st">"./data/02/gapminder_tsv.txt"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb124-328"><a href="#cb124-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.character</span>(year),</span>
+<span id="cb124-329"><a href="#cb124-329" aria-hidden="true" tabindex="-1"></a>         <span class="at">decade =</span> <span class="fu">str_sub</span>(year, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb124-330"><a href="#cb124-330" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">str_sub</span>(year, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb124-331"><a href="#cb124-331" aria-hidden="true" tabindex="-1"></a>         ) <span class="sc">|&gt;</span> </span>
+<span id="cb124-332"><a href="#cb124-332" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(decade, year, <span class="fu">everything</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb124-333"><a href="#cb124-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">"year"</span>, decade, year, <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb124-334"><a href="#cb124-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">parse_number</span>(year))</span>
+<span id="cb124-335"><a href="#cb124-335" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-336"><a href="#cb124-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-337"><a href="#cb124-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-340"><a href="#cb124-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-341"><a href="#cb124-341" aria-hidden="true" tabindex="-1"></a><span class="fu">read_delim</span>(<span class="st">"./data/02/obscure_file.tsv"</span>, <span class="at">delim =</span> <span class="st">"~"</span>)</span>
+<span id="cb124-342"><a href="#cb124-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-343"><a href="#cb124-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-346"><a href="#cb124-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-347"><a href="#cb124-347" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"./data/02/gapminder_messier.csv"</span>, <span class="at">comment =</span> <span class="st">"#"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb124-348"><a href="#cb124-348" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-349"><a href="#cb124-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-350"><a href="#cb124-350" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tidyr</span></span>
+<span id="cb124-351"><a href="#cb124-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-354"><a href="#cb124-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-355"><a href="#cb124-355" aria-hidden="true" tabindex="-1"></a>table1</span>
+<span id="cb124-356"><a href="#cb124-356" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-357"><a href="#cb124-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-360"><a href="#cb124-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-361"><a href="#cb124-361" aria-hidden="true" tabindex="-1"></a>table2</span>
+<span id="cb124-362"><a href="#cb124-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-363"><a href="#cb124-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-366"><a href="#cb124-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-367"><a href="#cb124-367" aria-hidden="true" tabindex="-1"></a>table2 <span class="sc">|&gt;</span> </span>
+<span id="cb124-368"><a href="#cb124-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type,</span>
+<span id="cb124-369"><a href="#cb124-369" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> count)</span>
+<span id="cb124-370"><a href="#cb124-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-371"><a href="#cb124-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-374"><a href="#cb124-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-375"><a href="#cb124-375" aria-hidden="true" tabindex="-1"></a>table3 <span class="sc">|&gt;</span> </span>
+<span id="cb124-376"><a href="#cb124-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(rate, <span class="fu">c</span>(<span class="st">"cases"</span>, <span class="st">"population"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-377"><a href="#cb124-377" aria-hidden="true" tabindex="-1"></a>  <span class="co"># mutate(across( c(cases, population), parse_number))</span></span>
+<span id="cb124-378"><a href="#cb124-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), parse_guess))</span>
+<span id="cb124-379"><a href="#cb124-379" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-380"><a href="#cb124-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-383"><a href="#cb124-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-384"><a href="#cb124-384" aria-hidden="true" tabindex="-1"></a>table4a</span>
+<span id="cb124-385"><a href="#cb124-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-386"><a href="#cb124-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-387"><a href="#cb124-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-390"><a href="#cb124-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-391"><a href="#cb124-391" aria-hidden="true" tabindex="-1"></a>table4b</span>
+<span id="cb124-392"><a href="#cb124-392" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-393"><a href="#cb124-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-396"><a href="#cb124-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-397"><a href="#cb124-397" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(table4a, table4b, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>),</span>
+<span id="cb124-398"><a href="#cb124-398" aria-hidden="true" tabindex="-1"></a>          <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">"_cases"</span>, <span class="st">"_pop"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-399"><a href="#cb124-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>country) <span class="sc">|&gt;</span> </span>
+<span id="cb124-400"><a href="#cb124-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(name, <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"type"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-401"><a href="#cb124-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> type, <span class="at">values_from =</span> value)</span>
+<span id="cb124-402"><a href="#cb124-402" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-405"><a href="#cb124-405" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-406"><a href="#cb124-406" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(table4a, table4b, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country"</span>),</span>
+<span id="cb124-407"><a href="#cb124-407" aria-hidden="true" tabindex="-1"></a>          <span class="at">suffix =</span> <span class="fu">c</span>(<span class="st">"_cases"</span>, <span class="st">"_pop"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-408"><a href="#cb124-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>country, <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb124-409"><a href="#cb124-409" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"type"</span>))</span>
+<span id="cb124-410"><a href="#cb124-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-411"><a href="#cb124-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-414"><a href="#cb124-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-415"><a href="#cb124-415" aria-hidden="true" tabindex="-1"></a>table5 <span class="sc">|&gt;</span> </span>
+<span id="cb124-416"><a href="#cb124-416" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(<span class="st">"year"</span>, century, year, <span class="at">sep =</span> <span class="st">""</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb124-417"><a href="#cb124-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">parse_integer</span>(year))</span>
+<span id="cb124-418"><a href="#cb124-418" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-419"><a href="#cb124-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-422"><a href="#cb124-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-423"><a href="#cb124-423" aria-hidden="true" tabindex="-1"></a>sort_of_an_array <span class="ot">&lt;-</span> <span class="fu">expand_grid</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">y =</span> x, <span class="at">z =</span> x) <span class="sc">|&gt;</span> </span>
+<span id="cb124-424"><a href="#cb124-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">value =</span> <span class="fu">rnorm</span>(<span class="fu">n</span>()))</span>
+<span id="cb124-425"><a href="#cb124-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-426"><a href="#cb124-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-427"><a href="#cb124-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-430"><a href="#cb124-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-431"><a href="#cb124-431" aria-hidden="true" tabindex="-1"></a>sort_of_an_array <span class="sc">|&gt;</span> </span>
+<span id="cb124-432"><a href="#cb124-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(x, y) <span class="sc">|&gt;</span> </span>
+<span id="cb124-433"><a href="#cb124-433" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(value))</span>
+<span id="cb124-434"><a href="#cb124-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-435"><a href="#cb124-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-436"><a href="#cb124-436" aria-hidden="true" tabindex="-1"></a><span class="fu">### Dplyr</span></span>
+<span id="cb124-437"><a href="#cb124-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-440"><a href="#cb124-440" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-441"><a href="#cb124-441" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
+<span id="cb124-442"><a href="#cb124-442" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-443"><a href="#cb124-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-446"><a href="#cb124-446" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-447"><a href="#cb124-447" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-448"><a href="#cb124-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(country)</span>
+<span id="cb124-449"><a href="#cb124-449" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-450"><a href="#cb124-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-453"><a href="#cb124-453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-454"><a href="#cb124-454" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-455"><a href="#cb124-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb124-456"><a href="#cb124-456" aria-hidden="true" tabindex="-1"></a>    country <span class="sc">==</span> <span class="st">"Afghanistan"</span>,</span>
+<span id="cb124-457"><a href="#cb124-457" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="dv">1957</span> <span class="sc">|</span> year <span class="sc">==</span> <span class="dv">1952</span></span>
+<span id="cb124-458"><a href="#cb124-458" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb124-459"><a href="#cb124-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-460"><a href="#cb124-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-461"><a href="#cb124-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-464"><a href="#cb124-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-465"><a href="#cb124-465" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-466"><a href="#cb124-466" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(continent) <span class="sc">|&gt;</span></span>
+<span id="cb124-467"><a href="#cb124-467" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lifeExp <span class="sc">==</span> <span class="fu">max</span>(lifeExp))</span>
+<span id="cb124-468"><a href="#cb124-468" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-469"><a href="#cb124-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-470"><a href="#cb124-470" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>rowwise</span>
+<span id="cb124-471"><a href="#cb124-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-474"><a href="#cb124-474" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-475"><a href="#cb124-475" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-476"><a href="#cb124-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>()</span>
+<span id="cb124-477"><a href="#cb124-477" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-480"><a href="#cb124-480" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-481"><a href="#cb124-481" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">y =</span> <span class="fu">runif</span>(<span class="dv">6</span>), <span class="at">z =</span> <span class="fu">runif</span>(<span class="dv">6</span>))</span>
+<span id="cb124-482"><a href="#cb124-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-483"><a href="#cb124-483" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span></span>
+<span id="cb124-484"><a href="#cb124-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb124-485"><a href="#cb124-485" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> <span class="fu">mean</span>(<span class="fu">c</span>(x, y, z)))</span>
+<span id="cb124-486"><a href="#cb124-486" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-487"><a href="#cb124-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-490"><a href="#cb124-490" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-491"><a href="#cb124-491" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb124-492"><a href="#cb124-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">m =</span> (x <span class="sc">+</span> y <span class="sc">+</span> z) <span class="sc">/</span> <span class="dv">3</span> )</span>
+<span id="cb124-493"><a href="#cb124-493" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-494"><a href="#cb124-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-497"><a href="#cb124-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-498"><a href="#cb124-498" aria-hidden="true" tabindex="-1"></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb124-499"><a href="#cb124-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb124-500"><a href="#cb124-500" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>id) <span class="sc">|&gt;</span> </span>
+<span id="cb124-501"><a href="#cb124-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
+<span id="cb124-502"><a href="#cb124-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">mean</span>(value))</span>
+<span id="cb124-503"><a href="#cb124-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-504"><a href="#cb124-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-505"><a href="#cb124-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-508"><a href="#cb124-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-509"><a href="#cb124-509" aria-hidden="true" tabindex="-1"></a>palmerpenguins<span class="sc">::</span>penguins <span class="sc">|&gt;</span> </span>
+<span id="cb124-510"><a href="#cb124-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(species) <span class="sc">|&gt;</span> </span>
+<span id="cb124-511"><a href="#cb124-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">mean</span>(bill_length_mm, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb124-512"><a href="#cb124-512" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-513"><a href="#cb124-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-514"><a href="#cb124-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-515"><a href="#cb124-515" aria-hidden="true" tabindex="-1"></a><span class="fu">### Questions</span></span>
+<span id="cb124-516"><a href="#cb124-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-517"><a href="#cb124-517" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>tidy evaluation / programming with dplyr</span>
+<span id="cb124-518"><a href="#cb124-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-521"><a href="#cb124-521" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-522"><a href="#cb124-522" aria-hidden="true" tabindex="-1"></a>some_country <span class="ot">&lt;-</span> <span class="st">"Argentina"</span></span>
+<span id="cb124-523"><a href="#cb124-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-524"><a href="#cb124-524" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-525"><a href="#cb124-525" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(country <span class="sc">==</span> some_country)</span>
+<span id="cb124-526"><a href="#cb124-526" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-527"><a href="#cb124-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-528"><a href="#cb124-528" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://dplyr.tidyverse.org/articles/programming.html&gt;</span></span>
+<span id="cb124-529"><a href="#cb124-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-532"><a href="#cb124-532" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-533"><a href="#cb124-533" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb124-534"><a href="#cb124-534" aria-hidden="true" tabindex="-1"></a>some_column <span class="ot">&lt;-</span> <span class="st">"country"</span></span>
+<span id="cb124-535"><a href="#cb124-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-536"><a href="#cb124-536" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-537"><a href="#cb124-537" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(some_column)</span>
+<span id="cb124-538"><a href="#cb124-538" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-539"><a href="#cb124-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-542"><a href="#cb124-542" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-543"><a href="#cb124-543" aria-hidden="true" tabindex="-1"></a>our_count <span class="ot">&lt;-</span> <span class="cf">function</span>(data, column) {</span>
+<span id="cb124-544"><a href="#cb124-544" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span> </span>
+<span id="cb124-545"><a href="#cb124-545" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>({{column}}) <span class="sc">|&gt;</span> </span>
+<span id="cb124-546"><a href="#cb124-546" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb124-547"><a href="#cb124-547" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb124-548"><a href="#cb124-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-549"><a href="#cb124-549" aria-hidden="true" tabindex="-1"></a><span class="fu">our_count</span>(gapminder, country)</span>
+<span id="cb124-550"><a href="#cb124-550" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-551"><a href="#cb124-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-554"><a href="#cb124-554" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-555"><a href="#cb124-555" aria-hidden="true" tabindex="-1"></a>our_count2 <span class="ot">&lt;-</span> <span class="cf">function</span>(data, column) {</span>
+<span id="cb124-556"><a href="#cb124-556" aria-hidden="true" tabindex="-1"></a>  column_sym <span class="ot">&lt;-</span> <span class="fu">sym</span>(column)</span>
+<span id="cb124-557"><a href="#cb124-557" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span> </span>
+<span id="cb124-558"><a href="#cb124-558" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="at">column =</span> <span class="fu">eval</span>(column_sym)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-559"><a href="#cb124-559" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>())</span>
+<span id="cb124-560"><a href="#cb124-560" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb124-561"><a href="#cb124-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-562"><a href="#cb124-562" aria-hidden="true" tabindex="-1"></a><span class="fu">our_count2</span>(gapminder, <span class="st">"country"</span>)</span>
+<span id="cb124-563"><a href="#cb124-563" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-564"><a href="#cb124-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-565"><a href="#cb124-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-566"><a href="#cb124-566" aria-hidden="true" tabindex="-1"></a><span class="fu">### ggglot2</span></span>
+<span id="cb124-567"><a href="#cb124-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-568"><a href="#cb124-568" aria-hidden="true" tabindex="-1"></a>and forcats</span>
+<span id="cb124-569"><a href="#cb124-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-572"><a href="#cb124-572" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-573"><a href="#cb124-573" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 12</span></span>
+<span id="cb124-574"><a href="#cb124-574" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb124-575"><a href="#cb124-575" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-dpi: 300</span></span>
+<span id="cb124-576"><a href="#cb124-576" aria-hidden="true" tabindex="-1"></a>plt <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-577"><a href="#cb124-577" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-578"><a href="#cb124-578" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb124-579"><a href="#cb124-579" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
+<span id="cb124-580"><a href="#cb124-580" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb124-581"><a href="#cb124-581" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country, <span class="at">text =</span> country)) <span class="sc">+</span></span>
+<span id="cb124-582"><a href="#cb124-582" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb124-583"><a href="#cb124-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-584"><a href="#cb124-584" aria-hidden="true" tabindex="-1"></a>plt</span>
+<span id="cb124-585"><a href="#cb124-585" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-586"><a href="#cb124-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-589"><a href="#cb124-589" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-590"><a href="#cb124-590" aria-hidden="true" tabindex="-1"></a>plotly<span class="sc">::</span><span class="fu">ggplotly</span>(plt)</span>
+<span id="cb124-591"><a href="#cb124-591" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-592"><a href="#cb124-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-593"><a href="#cb124-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-596"><a href="#cb124-596" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-597"><a href="#cb124-597" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-598"><a href="#cb124-598" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-599"><a href="#cb124-599" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(lifeExp, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb124-600"><a href="#cb124-600" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb124-601"><a href="#cb124-601" aria-hidden="true" tabindex="-1"></a>    <span class="at">country =</span> <span class="fu">fct_reorder</span>(country, lifeExp)</span>
+<span id="cb124-602"><a href="#cb124-602" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb124-603"><a href="#cb124-603" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(lifeExp, country)) <span class="sc">+</span></span>
+<span id="cb124-604"><a href="#cb124-604" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb124-605"><a href="#cb124-605" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-606"><a href="#cb124-606" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-609"><a href="#cb124-609" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-610"><a href="#cb124-610" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span>
+<span id="cb124-611"><a href="#cb124-611" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-612"><a href="#cb124-612" aria-hidden="true" tabindex="-1"></a>gapminder <span class="sc">|&gt;</span> </span>
+<span id="cb124-613"><a href="#cb124-613" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="fu">max</span>(year)) <span class="sc">|&gt;</span> </span>
+<span id="cb124-614"><a href="#cb124-614" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(continent, pop, <span class="at">fill =</span> country)) <span class="sc">+</span></span>
+<span id="cb124-615"><a href="#cb124-615" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">preserve =</span> <span class="st">"single"</span>)) <span class="sc">+</span></span>
+<span id="cb124-616"><a href="#cb124-616" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> country_colors) <span class="sc">+</span></span>
+<span id="cb124-617"><a href="#cb124-617" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb124-618"><a href="#cb124-618" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(),</span>
+<span id="cb124-619"><a href="#cb124-619" aria-hidden="true" tabindex="-1"></a>                     <span class="at">n.breaks =</span> <span class="dv">10</span>)</span>
+<span id="cb124-620"><a href="#cb124-620" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-621"><a href="#cb124-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-624"><a href="#cb124-624" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb124-625"><a href="#cb124-625" aria-hidden="true" tabindex="-1"></a>scales<span class="sc">::</span><span class="fu">label_number</span>()</span>
+<span id="cb124-626"><a href="#cb124-626" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb124-627"><a href="#cb124-627" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-628"><a href="#cb124-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-629"><a href="#cb124-629" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>geom_col / bar, other geoms</span>
+<span id="cb124-630"><a href="#cb124-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb124-631"><a href="#cb124-631" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
