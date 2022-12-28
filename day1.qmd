@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: Tag 1
 author: Jannik
 date: today
 abstract: |
@@ -12,7 +12,7 @@ execute:
   warning: false
 ---
 
-# Hello world
+# Morgenschiene
 
 *Markdown* text.
 **Bold**.
@@ -122,7 +122,7 @@ x |>
 
 Grammar of Graphics
 
-https://ggplot2.tidyverse.org/
+<https://ggplot2.tidyverse.org/>
 
 ```{r}
 x <- 1:10
@@ -201,7 +201,23 @@ penguins |>
   ungroup()
 ```
 
+# Nachmittagsschiene
 
+## Resources
 
+- <https://jmbuhr.de/dataintro/resources.html>
+- <https://quarto.org/>
+- <https://posit.co/resources/cheatsheets/>
+- <https://r4ds.had.co.nz/>
+
+## Overview
+
+![Source: <https://r4ds.had.co.nz/>](img/2022-12-28-14-35-32.png)
+
+- `readr`
+- `tidyr`
+- `dplyr`
+- `ggplot2`
+- `tidymodels`
 
 

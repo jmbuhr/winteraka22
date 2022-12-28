@@ -7,12 +7,14 @@ website:
   title: "winteraka22"
   navbar:
     left:
+      - href: ./day1.qmd
       - href: index.qmd
         text: Home
       - about.qmd
 
 format:
   html:
+    code-tools: true
     theme:
       dark: darkly
       light: flatly
