@@ -5,6 +5,7 @@ project:
 
 website:
   title: "winteraka22"
+  search: true
   navbar:
     left:
       - href: ./day1.qmd
