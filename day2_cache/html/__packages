@@ -9,3 +9,5 @@ stringr
 forcats
 gapminder
 gt
+reticulate
+palmerpenguins

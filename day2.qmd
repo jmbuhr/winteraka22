@@ -1,5 +1,5 @@
 ---
-title: "Day 2"
+title: "Tag 2"
 ---
 
 # Vormittag
@@ -7,6 +7,7 @@ title: "Day 2"
 ```{r}
 library(tidyverse)
 library(gapminder)
+library(palmerpenguins)
 library(gt)
 ```
 
@@ -266,5 +267,203 @@ gapminder |>
 ```
 
 # Nachmittag
+
+## Advanced quarto
+
+<https://quarto.org/>
+
+## Reticulate
+
+```{r}
+library(reticulate)
+```
+
+```{r}
+#| eval: false
+my_dataset <- palmerpenguins::penguins
+my_vector <- 1:100
+```
+
+```{python}
+#| eval: false
+xs = [x**2 for x in r.my_vector]
+```
+
+```{r}
+#| eval: false
+all(py$xs == my_vector ^ 2)
+```
+
+## Statistik
+
+### p-values
+
+```{r}
+penguins |> 
+  drop_na() |> 
+  ggplot(aes(sex, bill_length_mm, color = species)) +
+  ggbeeswarm::geom_quasirandom()
+```
+
+```{r}
+penguins |> 
+  drop_na() |> 
+  filter(species == "Adelie") |> 
+  ggplot(aes(sex, bill_length_mm)) +
+  ggbeeswarm::geom_quasirandom()
+```
+
+### parametric
+
+```{r}
+penguins |>
+  drop_na() |>
+  filter(species == "Adelie") |>
+  ggplot(aes(bill_length_mm, fill = sex)) +
+  geom_density(alpha = 0.4)
+```
+
+H_0 = The sex of the penguins does not have and influence on
+the bill length. All bill lengths come from the same distribution.
+
+H_1 = There is an influence.
+
+H_1a = There is an influence. And males have a longer bill.
+
+
+```{r}
+adelie <- penguins |>
+  drop_na() |>
+  filter(species == "Adelie")
+
+adelie
+```
+
+```{r}
+ggplot() +
+  geom_function(fun = dnorm, color = "black") +
+  geom_function(fun = ~ dt(.x, df = 3), color = "purple") +
+  geom_function(fun = ~ dt(.x, df = 10), color = "red") +
+  lims(x = c(-3, 3))
+```
+
+$\alpha$ = significance threshold = 5%
+
+```{r}
+t.test(
+  formula = bill_length_mm ~ sex,
+  data = adelie
+)
+```
+
+```{r}
+t.test(
+  formula = bill_length_mm ~ sex,
+  data = adelie,
+  alternative = "less"
+)
+```
+
+### multiple testing
+
+```{r}
+pvalues <- c(0.01, 0.05, 0.4, 0.002)
+p.adjust(pvalues, method = "bonferroni")
+```
+
+
+```{r}
+p.adjust(pvalues, method = "fdr")
+```
+
+```{r}
+power.t.test(n = 5, delta = 1, sd = 0.5, sig.level = 0.05)
+```
+
+
+```{r}
+power.t.test(delta = 1, sd = 1, sig.level = 0.05, power = 0.9)
+```
+
+```{r}
+ggplot() +
+  geom_function(fun = ~ dnorm(.x, 0, 1), color = "black") +
+  geom_function(fun = ~ dnorm(.x, 1, 1), color = "red") +
+  lims(x = c(-3, 8))
+```
+
+
+### non-parametric
+
+```{r}
+wilcox.test(
+  formula = bill_length_mm ~ sex,
+  data = adelie,
+  alternative = "less"
+)
+```
+
+```{r}
+wilcox.test(x = 1:3, y = 4:6)
+```
+
+### ANOVA
+
+```{r}
+males <- penguins |> 
+  filter(sex == "male")
+
+males
+```
+
+
+
+```{r}
+males |> 
+  ggplot(aes(species, bill_length_mm)) +
+  ggbeeswarm::geom_beeswarm()
+```
+
+```{r}
+anova <- aov(bill_length_mm ~ species, males)
+summary(anova)
+```
+
+```{r}
+TukeyHSD(anova)
+```
+
+```{r}
+multcomp::glht(anova, multcomp::mcp(species = "Dunnet")) |> 
+  summary()
+```
+
+
+### two-way anova
+
+```{r}
+anova <- aov(bill_length_mm ~ species + sex, penguins)
+summary(anova)
+```
+
+```{r}
+penguins |> 
+  drop_na() |> 
+  ggplot(aes(species, bill_length_mm)) +
+  ggbeeswarm::geom_beeswarm() +
+  facet_wrap(~sex)
+```
+
+Fun fact: it's all linear models!
+
+```{r}
+model <- lm(bill_length_mm ~ species + sex, penguins)
+summary(model)
+anova(model)
+```
+
+
+
+
 
 
