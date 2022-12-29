@@ -63,13 +63,4 @@ games |>
   pivot_wider(names_from = boardgamecategory, values_from = value, values_fill = FALSE)
 ```
 
-```{r}
-#| eval: false
-games |> 
-  head() |> 
-  mutate(across(starts_with("boardgame"), clean_category))
-```
-
-
-
 

@@ -11,13 +11,16 @@ website:
       - href: ./day1.qmd
       - href: ./day2.qmd
       - href: ./day3.qmd
+      - text: Beispiele
+        menu: 
+        - ./boardgames.qmd
       - href: index.qmd
         text: Home
-      - about.qmd
 
 format:
   html:
     code-tools: true
+    code-link: true
     theme:
       light: flatly
       dark: darkly
