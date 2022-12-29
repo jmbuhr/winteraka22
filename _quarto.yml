@@ -10,6 +10,7 @@ website:
     left:
       - href: ./day1.qmd
       - href: ./day2.qmd
+      - href: ./day3.qmd
       - href: index.qmd
         text: Home
       - about.qmd

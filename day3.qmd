@@ -1,0 +1,19 @@
+---
+title: "Tag 3"
+---
+
+# Datenprojekte Tips
+
+- Korrelationen? `corrr`!
+  <https://corrr.tidymodels.org/>
+- Mehr Daten aus dem Internet kratzen? `rvest`!
+  <https://rvest.tidyverse.org/>
+- Iterieren / loop? `purrr`!
+  <https://purrr.tidyverse.org/>
+
+
+# Vormittag
+
+# Nachmittag
+
+
