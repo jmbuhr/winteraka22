@@ -9,6 +9,7 @@ website:
   navbar:
     left:
       - href: ./day1.qmd
+      - href: ./day2.qmd
       - href: index.qmd
         text: Home
       - about.qmd
@@ -23,4 +24,5 @@ format:
     toc: true
 
 execute: 
+  cache: true
   warning: false
