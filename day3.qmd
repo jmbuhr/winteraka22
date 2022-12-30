@@ -2,6 +2,12 @@
 title: "Tag 3"
 ---
 
+# Setup
+
+```{r}
+library(tidyverse)
+```
+
 # Datenprojekte Tips
 
 - Korrelationen? `corrr`!
@@ -14,16 +20,15 @@ title: "Tag 3"
   <https://jmbuhr.de/dataintro/distributions-summaries-and-dimensionality-reduction.html#chrunching-dimensions-with-dimensionality-reduction-pca>
 - Textdaten? `tidytext`!
   <https://juliasilge.github.io/tidytext/>
-
-```{r}
-gapminder::gapminder$year |> max()
-```
+- Animierte Plots? `gganimate`!
+  <https://gganimate.com/#yet-another-example>
 
 # Vormittag
 
 ## Population data
 
 <https://population.un.org/wpp/Download/Standard/CSV/>
+
 
 
 # Nachmittag
