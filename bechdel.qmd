@@ -24,8 +24,19 @@ str(raw_bechdel)
 str(raw_movies)
 ```
 
+
+
 # Data cleaning
 
 # EDA
+
+
+```{r}
+raw_bechdel |> 
+  group_by(year) |> 
+  mutate(rating = mean(rating)) |> 
+  ggplot(aes(year, rating, text = title)) +
+  geom_point() 
+```
 
 
