@@ -25,6 +25,8 @@ library(gapminder)
   <https://juliasilge.github.io/tidytext/>
 - Animierte Plots? `gganimate`!
   <https://gganimate.com/#yet-another-example>
+- Coole Farben? ColorBrewer!
+  <https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3>
 
 # Vormittag
 
