@@ -27,7 +27,7 @@ library(gapminder)
   <https://gganimate.com/#yet-another-example>
 - Coole Farben? ColorBrewer und Viridis!
   <https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3>
-  (`scale_color_brewer`, `scale_color_viridis_`)
+  (`scale_color_brewer`, `RColorBewer::brewer.pal` `scale_color_viridis_`)
 
 # Vormittag
 
