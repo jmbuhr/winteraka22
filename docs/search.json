@@ -67,7 +67,7 @@
     "href": "day3.html",
     "title": "Tag 3",
     "section": "",
-    "text": "Datenprojekte Tips\n\nKorrelationen? corrr! https://corrr.tidymodels.org/\nMehr Daten aus dem Internet kratzen? rvest! https://rvest.tidyverse.org/\nIterieren / loop? purrr! https://purrr.tidyverse.org/\nDimensionality reduction? PCA! https://jmbuhr.de/dataintro/distributions-summaries-and-dimensionality-reduction.html#chrunching-dimensions-with-dimensionality-reduction-pca\nTextdaten? tidytext! https://juliasilge.github.io/tidytext/\n\n\n\nVormittag\n\n\nNachmittag"
+    "text": "Korrelationen? corrr! https://corrr.tidymodels.org/\n\nMehr Daten aus dem Internet kratzen? rvest! https://rvest.tidyverse.org/\n\nIterieren / loop? purrr! https://purrr.tidyverse.org/\n\nDimensionality reduction? PCA mit tidymodels! https://jmbuhr.de/dataintro/distributions-summaries-and-dimensionality-reduction.html#chrunching-dimensions-with-dimensionality-reduction-pca\n\nTextdaten? tidytext! https://juliasilge.github.io/tidytext/\n\n\n\ngapminder::gapminder$year |> max()\n\n[1] 2007"
   },
   {
     "objectID": "index.html",
@@ -75,5 +75,12 @@
     "title": "winteraka22",
     "section": "",
     "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\nprint(\"hello world\")\n\n[1] \"hello world\""
+  },
+  {
+    "objectID": "day3.html#population-data",
+    "href": "day3.html#population-data",
+    "title": "Tag 3",
+    "section": "Population data",
+    "text": "Population data\nhttps://population.un.org/wpp/Download/Standard/CSV/"
   }
 ]

@@ -10,13 +10,21 @@ title: "Tag 3"
   <https://rvest.tidyverse.org/>
 - Iterieren / loop? `purrr`!
   <https://purrr.tidyverse.org/>
-- Dimensionality reduction? PCA!
+- Dimensionality reduction? PCA mit `tidymodels`!
   <https://jmbuhr.de/dataintro/distributions-summaries-and-dimensionality-reduction.html#chrunching-dimensions-with-dimensionality-reduction-pca>
 - Textdaten? `tidytext`!
   <https://juliasilge.github.io/tidytext/>
 
+```{r}
+gapminder::gapminder$year |> max()
+```
 
 # Vormittag
+
+## Population data
+
+<https://population.un.org/wpp/Download/Standard/CSV/>
+
 
 # Nachmittag
 
