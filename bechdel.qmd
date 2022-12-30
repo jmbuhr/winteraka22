@@ -1,0 +1,31 @@
+---
+title: "bechdel"
+---
+
+# Setup
+
+[readme](https://github.com/rfordatascience/tidytuesday/blob/2e9bd5a67e09b14d01f616b00f7f7e0931515d24/data/2021/2021-03-09/readme.md)
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+raw_bechdel <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-09/raw_bechdel.csv')
+raw_movies <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-03-09/movies.csv')
+```
+
+```{r}
+str(raw_bechdel)
+```
+
+
+```{r}
+str(raw_movies)
+```
+
+# Data cleaning
+
+# EDA
+
+

@@ -14,6 +14,9 @@ website:
       - text: Beispiele
         menu: 
         - ./boardgames.qmd
+        - ./bechdel.qmd
+        - ./chocolate.qmd
+        - ./unfall.qmd
       - href: index.qmd
         text: Home
 

@@ -1,0 +1,27 @@
+---
+title: "Chocolate"
+---
+
+# Setup
+
+[readme](https://github.com/rfordatascience/tidytuesday/blob/15fa8e89b5c52e4fcba05633c8c4a0abeebf00c1/data/2022/2022-01-18/readme.md)
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+raw <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-18/chocolate.csv')
+```
+
+```{r}
+str(raw)
+```
+
+
+
+# Data cleaning
+
+# EDA
+
+
