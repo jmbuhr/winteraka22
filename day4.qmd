@@ -1,0 +1,10 @@
+---
+title: "Tag 4"
+---
+
+# Weitere Tips und Links
+
+- Präsentation? `quarto` mit `revealjs`! <https://quarto.org/docs/presentations/revealjs/>
+- Größere Datenmengen oder ein ganzes Projekt mit Abhängigkeiten? `targets`! <https://books.ropensci.org/targets/>, e.g. <https://hits-mbm-dev.github.io/paper-talin-loop/_analysis.html>
+- Berechnungen in R mit Nutzereingaben auf dem Server? `shiny`! <https://quarto.org/docs/interactive/shiny/index.html>
+

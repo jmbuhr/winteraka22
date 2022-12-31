@@ -12,23 +12,32 @@ library(tidyverse)
 
 
 ```{r}
+read_year <- function(path) {
+  name <- basename(path)
+  read_csv(path) |> 
+    mutate(year = parse_number(name))
+}
+
 files <- fs::dir_ls("./data/unfall/", glob = "*.csv")
-map(files, read_lines, n_max = 1)
+years <- map(files, read_year)
 ```
 
 ```{r}
-read_lines("./data/unfall/Unfaelle_2016_LinRef.shp.csv", n_max = 5)
+#| eval: false
+full_join(years[[1]], years[[2]])
 ```
 
 
+
 ```{r}
-raw <- read_csv("./data/unfall/Unfaelle_2016_LinRef.shp.csv")
-raw
+#| eval: false
+all_accidents <- reduce(years, full_join)
 ```
 
 
+
 ```{r}
-accidents <- raw |> 
+accidents <- years[[1]] |> 
   mutate(across(c(X,Y), ~ .x / 1e5 ))
 ```
 
@@ -61,8 +70,6 @@ accidents |>
   filter(Y > 59) |> 
   select(ULAND, everything())
 ```
-
-
 
 
 

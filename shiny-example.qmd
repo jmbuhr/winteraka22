@@ -1,0 +1,62 @@
+---
+title: "Shiny Example"
+# server: shiny
+params:
+  country:
+    label: Country
+    value: Germany
+    input: select
+    choices: [Germany, Austria]
+---
+
+::: {.callout-tip collapse="true"}
+# Hello
+
+More info!
+:::
+
+# Example
+
+```{r}
+library(tidyverse)
+library(gapminder)
+```
+
+```{r}
+gapminder |> 
+  filter(country == params$country) |> 
+  head() |> 
+  knitr::kable()
+```
+
+
+```{r}
+tibble(
+  x = "hello, world, test"
+) |> 
+  separate(x, into = c("first", "rest"), sep = ",",
+           extra = "merge")
+```
+
+<https://quarto.org/docs/interactive/shiny/index.html>
+
+```{r}
+#| eval: false
+selectInput("country", "country", c("Germany", "Austria"))
+plotOutput("distPlot")
+```
+
+```{r}
+#| context: server
+#| eval: false
+library(tidyverse)
+library(gapminder)
+
+output$distPlot <- renderPlot({
+  gapminder |> 
+    filter(country == input$country) |> 
+    ggplot(aes(year, lifeExp)) +
+    geom_line()
+})
+```
+
