@@ -37,25 +37,21 @@ all_accidents <- reduce(years, full_join)
 
 
 ```{r}
-accidents <- years[[1]] |> 
-  mutate(across(c(X,Y), ~ .x / 1e5 ))
+accidents <- years[[1]]
 ```
 
 
 ```{r}
 world <- map_data("world")
-world |> 
-  filter(region == "Germany") |> 
-  ggplot(aes(long, lat, group = subregion)) +
-  geom_path() +
-  coord_map()
+germany <-  world |> 
+  filter(region == "Germany")
 ```
-
 
 ```{r}
 accidents |> 
-  ggplot(aes(X, Y, color = factor(ULAND))) +
-  geom_point() +
+  ggplot(aes(XGCSWGS84, YGCSWGS84)) +
+  geom_point(aes(color = factor(ULAND))) +
+  geom_path(data = germany, aes(x = long, y = lat, group = subregion)) +
   coord_map(projection = "mercator")
 ```
 
