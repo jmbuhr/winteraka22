@@ -50,7 +50,7 @@ germany <-  world |>
 ```{r}
 accidents |> 
   ggplot(aes(XGCSWGS84, YGCSWGS84)) +
-  geom_point(aes(color = factor(ULAND))) +
+  geom_point(aes(color = factor(IstRad))) +
   geom_path(data = germany, aes(x = long, y = lat, group = subregion)) +
   coord_map(projection = "mercator")
 ```
